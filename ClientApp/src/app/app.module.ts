@@ -24,16 +24,18 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { AddIsValidIsInvalidClassDirective } from './directives/add-is-valid-is-invalid-class.directive';
 import { WalletOverviewComponent } from './components/wallet-overview/wallet-overview.component';
 import { AddCardRandomColorDirective } from './directives/add-card-random-color.directive';
+import { environment } from '../environments/environment';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 
-const config = {
-    apiKey: "AIzaSyBdZKnwgcDJs0uxX3cEjFTndq7hYuRSKw8",
-    authDomain: "wallet-13623.firebaseapp.com",
-    databaseURL: "https://wallet-13623.firebaseio.com",
-    projectId: "wallet-13623",
-    storageBucket: "wallet-13623.appspot.com",
-    messagingSenderId: "458151696297"
-  };
+// const config = {
+//     apiKey: "AIzaSyBdZKnwgcDJs0uxX3cEjFTndq7hYuRSKw8",
+//     authDomain: "wallet-13623.firebaseapp.com",
+//     databaseURL: "https://wallet-13623.firebaseio.com",
+//     projectId: "wallet-13623",
+//     storageBucket: "wallet-13623.appspot.com",
+//     messagingSenderId: "458151696297"
+//   };
 
 @NgModule({
   declarations: [
@@ -49,14 +51,15 @@ const config = {
     AddEditWalletComponent,
     AddIsValidIsInvalidClassDirective,
     WalletOverviewComponent,
-    AddCardRandomColorDirective
+    AddCardRandomColorDirective,
+    SignUpComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RoutingModule,
-    AngularFireModule.initializeApp(config),
+    AngularFireModule.initializeApp(environment.af),
     AngularFireAuthModule,
     ReactiveFormsModule,
     AlertModule.forRoot()
