@@ -1,0 +1,39 @@
+<div *ngFor="let alert of alerts">
+  <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
+</div>
+<form [formGroup]="walletForm" (ngSubmit)="formSubmit()" novalidate>
+  <div class="form-group row">
+    <label for="name" class="col-sm-2 col-form-label">Name</label>
+    <div class="col-sm-10">
+      <input id="name" class="form-control" type="text" formControlName="Name"
+        [class.is-valid]="name.valid && (name.touched || name.dirty)"
+        [class.is-invalid]="name.invalid && (name.touched || name.dirty)">
+      <div *ngIf="name.valid" class="valid-feedback">
+        Looks good!
+      </div>
+      <div *ngIf="name.errors?.required && (name.touched || name.dirty)" class="invalid-feedback">
+        Name is required!
+      </div>
+      <div *ngIf="name.errors?.nameOccupied && (name.touched || name.dirty)" class="invalid-feedback">
+        You already have wallet called {{name.value}}
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="description" class="col-sm-2 col-form-label">Description</label>
+    <div class="col-sm-10">
+      <input id="description" class="form-control" type="text" formControlName="Description">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="fast-access">Fast access</label>
+    <div class="col-sm-1">
+      <input id="fast-access" class="form-control" type="checkbox" formControlName="FastAccess">
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </div>
+</form>

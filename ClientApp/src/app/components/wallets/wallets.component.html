@@ -1,0 +1,37 @@
+<div class="col-sm-12">
+  <div class="card" style="margin-top: 2%">
+    <div class="card-header">
+      Add new wallet
+    </div>
+    <div class="card-body">
+      <app-add-edit-wallet #addEditWalletComponent (walletSaved)="walletSaved()"></app-add-edit-wallet>
+    </div>
+  </div>
+</div>
+
+
+<ng-container *ngFor="let wallet of wallets | async; let odd = odd">
+  <div *ngIf="!odd; else notOdd" class="row">
+    <div class="col-sm-6">
+      <div class="card" [appAddCardRandomColor]="true" style="margin-top: 2%">
+        <div class="card-header">
+          {{wallet.name}}
+        </div>
+        <div class="card-body">
+          {{wallet | json}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #notOdd>
+    <div class="col-sm-6">
+      <div class="card" [appAddCardRandomColor]="true" style="margin-top: 2%">
+        <div class="card-header">
+          {{wallet.name}}
+        </div>
+        <div class="card-body">
+          {{wallet | json}}
+        </div>
+      </div>
+    </div>
+  </ng-template>

@@ -1,0 +1,27 @@
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+  <div class="sidebar-sticky">
+    <ul class="nav flex-column">
+      <li class="nav-item" *ngFor="let sideBarOption of sideBarOptions">
+        <a class="nav-link" routerLinkActive="active"
+          [routerLink]="[sideBarOption.routerLink]">
+          <span [innerHTML]="sideBarOption.icon | feather"></span>
+          {{sideBarOption.name}}
+        </a>
+      </li>
+    </ul>
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>Quick wallets</span>
+      <a (click)="addWallet()" style="cursor: pointer;" class="d-flex align-items-center text-muted">
+        <span [innerHTML]="'plus-circle' | feather"></span>
+      </a>
+    </h6>
+    <ul *ngIf="sideBarWallets?.length" class="nav flex-column mb-2">
+      <li *ngFor="let sideBarWallet of sideBarWallets" class="nav-item">
+        <a class="nav-link" style="cursor: pointer;">
+          <span [innerHTML]="sideBarWallet.icon | feather"></span>
+          {{sideBarWallet.name}}
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
