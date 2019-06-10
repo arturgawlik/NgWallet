@@ -1,54 +1,76 @@
 import { Injectable } from '@angular/core';
-import { Router } from  "@angular/router";
-import { auth } from  'firebase/app';
-import { AngularFireAuth } from  "@angular/fire/auth";
-import { User } from  'firebase';
+import { Router } from "@angular/router";
+import { auth } from 'firebase/app';
+import { AngularFireAuth } from "@angular/fire/auth";
+import { User } from 'firebase';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
 
-  user: User;
-
-  get isLoggedIn(): boolean {
-    const user = <User>JSON.parse(localStorage.getItem('user'));
-    return user !== null;
+  constructor(private afAuth: AngularFireAuth, private router: Router) {
   }
 
-  getTokenPromise() {
-    return this.afAuth.idToken.toPromise();
-  }
-
-  getToeknObs() {
-    return this.afAuth.idToken;
-  }
-
-  constructor(public afAuth: AngularFireAuth, private router: Router) {
-    this.afAuth.authState.subscribe(user => {
-      if (user) {
-        this.user = user;
-        localStorage.setItem('user', JSON.stringify(this.user));
-      } else {
-        localStorage.setItem('user', null);
-      }
+  doFacebookLogin() {
+    return new Promise<any>((resolve, reject) => {
+      let provider = new auth.FacebookAuthProvider();
+      this.afAuth.auth
+        .signInWithPopup(provider)
+        .then(res => {
+          this.router.navigate(['']);
+          resolve(res);
+        }, err => reject(err));
     });
   }
 
-  async loginWithGoogle() {
-    await this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
-    this.router.navigate(['']);
+  doLoginWithGoogle() {
+    return new Promise<any>((resolve, reject) => {
+      let provider = new auth.GoogleAuthProvider();
+      provider.addScope('profile');
+      provider.addScope('email');
+      this.afAuth.auth
+        .signInWithPopup(provider)
+        .then(res => {
+          this.router.navigate(['']);
+          resolve(res);
+        }, err => reject(err));
+    })
   }
 
-  async loginWithFacebook() {
-    await this.afAuth.auth.signInWithPopup(new auth.FacebookAuthProvider());
-    this.router.navigate(['']);
+  doRegister(email: string, password: string) {
+    return new Promise<any>((resolve, reject) => {
+      auth().createUserWithEmailAndPassword(email, password)
+        .then(res => {
+          this.router.navigate(['']);
+          resolve(res);
+        }, err => reject(err));
+    })
   }
 
-  async logout(){
-    await this.afAuth.auth.signOut();
-    localStorage.removeItem('user');
-    this.router.navigate(['login']);
+  doLogin(email: string, password: string) {
+    return new Promise<any>((resolve, reject) => {
+      auth().signInWithEmailAndPassword(email, password)
+        .then(res => {
+          this.router.navigate(['']);
+          resolve(res);
+        }, err => reject(err));
+    })
+  }
+
+  doLogout() {
+    return new Promise<any>((resolve, reject) => {
+      if (this.afAuth.auth.currentUser) {
+        this.afAuth.auth.signOut()
+          .then(res => {
+            this.router.navigate(['login']);
+            resolve();
+          })
+          .catch(err => {
+            reject();
+          });
+      } else {
+        reject();
+      }
+    })
   }
 
 }

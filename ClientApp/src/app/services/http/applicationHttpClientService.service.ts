@@ -3,11 +3,12 @@ import { AuthService } from "../auth/auth.service";
 import { map, flatMap, first } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { AngularFireAuth } from "@angular/fire/auth";
 
 @Injectable()
 export class ApplicationHttpClient {
 
-    constructor(private authService: AuthService, private httpClient: HttpClient) {
+    constructor(private afAuth: AngularFireAuth, private httpClient: HttpClient) {
     }
 
     get<T>(url: string): Observable<T> {
@@ -47,13 +48,14 @@ export class ApplicationHttpClient {
     }
 
     private getHttpHeader() {
-        return this.authService.getToeknObs().pipe(
+        return this.afAuth.idToken.pipe(
             map(token => {
                 return new HttpHeaders({
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 });
-            })
-        );
+            }
+            ))
     }
+
 } 

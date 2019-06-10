@@ -12074,11 +12074,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/arturgawlik/Documents/ProgramowanieDotNet/walletAngular/wallet/wallet.csproj",
+      "projectUniqueName": "/Users/arturgawlik/Documents/ProgramowanieDotNet/walletAngular/wallet/ngWallet/wallet.csproj",
       "projectName": "wallet",
-      "projectPath": "/Users/arturgawlik/Documents/ProgramowanieDotNet/walletAngular/wallet/wallet.csproj",
+      "projectPath": "/Users/arturgawlik/Documents/ProgramowanieDotNet/walletAngular/wallet/ngWallet/wallet.csproj",
       "packagesPath": "/Users/arturgawlik/.nuget/packages/",
-      "outputPath": "/Users/arturgawlik/Documents/ProgramowanieDotNet/walletAngular/wallet/obj/",
+      "outputPath": "/Users/arturgawlik/Documents/ProgramowanieDotNet/walletAngular/wallet/ngWallet/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"

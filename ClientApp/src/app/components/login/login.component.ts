@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginWithGoogle() {
-    this.authService.loginWithGoogle()
+    this.authService.doLoginWithGoogle()
       .then(() => {
         this.httpClient.post('api/applicationUser/addApplicationUserIfNotExists', null).subscribe(
           (d) => console.log(d),
