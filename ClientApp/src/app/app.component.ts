@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
               this.setupTitle('login');
               break;
             case '/home':
-              this.setupTitle('dashboard');
+              this.setupTitle('home');
               break;
             case '/wallets':
               this.setupTitle('wallets');

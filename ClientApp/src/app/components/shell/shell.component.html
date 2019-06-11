@@ -1,40 +1,21 @@
-<!-- <app-nav-bar></app-nav-bar>
-<div class="container-fluid">
-  <div class="row">
-    <app-side-bar></app-side-bar>
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <router-outlet></router-outlet>
-    </main>
-  </div>
-</div> -->
-
-<div class="d-flex" id="wrapper" [class.toggled]="!sideBarVisible">
+<div class="d-flex" id="wrapper" [class.toggled]="sideBarVisible">
 
   <!-- Sidebar -->
   <div class="bg-light border-right" id="sidebar-wrapper">
     <div class="sidebar-heading text-center">_ngWallet </div>
     <div class="list-group list-group-flush">
-      <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
-      <a href="#" class="list-group-item list-group-item-action bg-light">Shortcuts</a>
-      <a href="#" class="list-group-item list-group-item-action bg-light">Overview</a>
-      <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
-      <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
-      <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
+      <a href="javascript::void" [routerLink]="'/home'" (click)="sideBarVisible=false;" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+      <a href="javascript::void" [routerLink]="'/wallets'" (click)="sideBarVisible=false;" class="list-group-item list-group-item-action bg-light">Wallets</a>
+      <a href="#" class="list-group-item list-group-item-action bg-light">Fast access</a>
     </div>
   </div>
   <!-- /#sidebar-wrapper -->
 
   <!-- Page Content -->
   <div id="page-content-wrapper">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-      <button class="btn btn-light" (click)="sideBarVisible=!sideBarVisible"><i class="fas fa-ellipsis-v"></i></button>
-      <button class="navbar-toggler" type="button" (click)="navBarVisible=!navBarVisible"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" [class.show]="!navBarVisible" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+    <nav class="navbar navbar-expand navbar-light bg-light border-bottom">
+      <button class="btn btn-light" (click)="sideBarVisible=true"><i class="fas fa-ellipsis-v"></i></button>
+        <ul class="navbar-nav ml-auto mt-0">
           <li class="nav-item active">
             <a class="nav-link" href="javascript::void"><i class="fas fa-sliders-h"></i><span class="sr-only"></span></a>
           </li>
@@ -42,7 +23,6 @@
             <a class="nav-link" href="javascript::void" (click)="logout()"><i class="fas fa-sign-out-alt"></i></a>
           </li>
         </ul>
-      </div>
     </nav>
 
     <div class="container-fluid">
@@ -50,5 +30,5 @@
     </div>
   </div>
   <!-- /#page-content-wrapper -->
-
+  <div class="overlay" [class.active]="sideBarVisible" (click)="sideBarVisible=false;"></div>
 </div>

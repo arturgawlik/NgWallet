@@ -17,7 +17,7 @@ body {
   }
   
   #sidebar-wrapper .list-group {
-    width: 15rem;
+    width: 14rem;
   }
   
   #page-content-wrapper {
@@ -27,8 +27,37 @@ body {
   #wrapper.toggled #sidebar-wrapper {
     margin-left: 0;
   }
+
+  #wrapper {
+    display: block;
+  }
+
+  #sidebar-wrapper {
+    position: fixed;
+    z-index: 9999;
+  }
+
+  .overlay {
+    display: none;
+    position: fixed;
+    /* full screen */
+    width: 100vw;
+    height: 100vh;
+    /* transparent black */
+    background: rgba(0, 0, 0, 0.7);
+    /* middle layer, i.e. appears below the sidebar */
+    z-index: 998;
+    opacity: 0;
+    /* animate the transition */
+    transition: all 0.5s ease-in-out;
+  }
+
+  .overlay.active {
+    display: block;
+    opacity: 1;
+  }
   
-  @media (min-width: 768px) {
+  /* @media (min-width: 768px) {
     #sidebar-wrapper {
       margin-left: 0;
     }
@@ -41,5 +70,5 @@ body {
     #wrapper.toggled #sidebar-wrapper {
       margin-left: -15rem;
     }
-  }
+  } */
   

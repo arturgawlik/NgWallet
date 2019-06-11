@@ -9,8 +9,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class ShellComponent implements OnInit {
 
-  sideBarVisible = true;
-  navBarVisible = true;
+  sideBarVisible = false;
 
   constructor(private authService: AuthService) {
   }
