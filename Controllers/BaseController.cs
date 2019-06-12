@@ -8,6 +8,9 @@ namespace wallet.Controllers
     [Authorize(Policy = "UserId")]
     public class BaseController : Controller
     {
+        
+        
+
         protected string _firebaseUserId => User.Claims.First(c => c.Type.Equals("user_id")).Value;
         public BaseController()
         {

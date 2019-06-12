@@ -26,16 +26,13 @@ import { WalletOverviewComponent } from './components/wallet-overview/wallet-ove
 import { AddCardRandomColorDirective } from './directives/add-card-random-color.directive';
 import { environment } from '../environments/environment';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { WalletDashboardComponent } from './components/wallet-dashboard/wallet-dashboard.component';
+import { WalletService } from './services/wallet/wallet.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChartModule } from 'primeng/chart';
 
 
-// const config = {
-//     apiKey: "AIzaSyBdZKnwgcDJs0uxX3cEjFTndq7hYuRSKw8",
-//     authDomain: "wallet-13623.firebaseapp.com",
-//     databaseURL: "https://wallet-13623.firebaseio.com",
-//     projectId: "wallet-13623",
-//     storageBucket: "wallet-13623.appspot.com",
-//     messagingSenderId: "458151696297"
-//   };
 
 @NgModule({
   declarations: [
@@ -52,19 +49,23 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     AddIsValidIsInvalidClassDirective,
     WalletOverviewComponent,
     AddCardRandomColorDirective,
-    SignUpComponent
+    SignUpComponent,
+    DashboardComponent,
+    WalletDashboardComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     RoutingModule,
     AngularFireModule.initializeApp(environment.af),
     AngularFireAuthModule,
     ReactiveFormsModule,
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    ChartModule
   ],
-  providers: [AuthService, AuthGuard, LoginGuard, ApplicationHttpClient],
+  providers: [AuthService, AuthGuard, LoginGuard, ApplicationHttpClient, WalletService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

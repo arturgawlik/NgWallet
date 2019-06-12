@@ -1,0 +1,24 @@
+<div class="card-header d-flex">
+  <div>
+    {{walletName$ | async}}
+  </div>
+  <div class="ml-auto">
+    <span class="badge badge-pill badge-info">
+      {{walletCurrentState$ | async}} {{walletCurrency$ | async}}
+    </span>
+  </div>
+</div>
+<div class="card-body">
+  <div>
+    <p-chart type="line" [data]="walletChartData$ | async" height="40vh">
+    </p-chart>
+  </div>
+  <div class="row">
+    <div class="p-2 col-sm-12 col-md-6 elem-h">
+      elo
+    </div>
+    <div class="p-2 col-sm-12 col-md-6 elem-h">
+      no elo
+    </div>
+  </div>
+</div>
