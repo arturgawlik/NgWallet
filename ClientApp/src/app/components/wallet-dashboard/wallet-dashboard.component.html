@@ -10,15 +10,91 @@
 </div>
 <div class="card-body">
   <div>
-    <p-chart type="line" [data]="walletChartData$ | async" height="40vh">
+    <p-chart type="line" [data]="walletChartData$ | async" height="35vh">
     </p-chart>
   </div>
   <div class="row">
-    <div class="p-2 col-sm-12 col-md-6 elem-h">
+    <div class="p-2 col-sm-12 col-md-8 elem-h">
       elo
     </div>
-    <div class="p-2 col-sm-12 col-md-6 elem-h">
-      no elo
+    <div class="p-2 col-sm-12 col-md-4 elem-h" style="overflow-y: scroll">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" style="background-color: #eaeaea;">
+          <div class="row">
+            <div class="col-md-12 col-sm-6 col-lg-6">
+              <i class="fas fa-arrow-down"></i>
+              100,00
+            </div>
+            <div class="col-md-12 col-sm-6 col-lg-6 d-flex">
+              <div class="ml-auto">
+                <small>26.08</small>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <small>Musiałem oddać babci</small>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item" style="background-color: #f9f9f9;">
+          <div class="row">
+            <div class="col-md-12 col-sm-6 col-lg-6">
+              <i class="fas fa-arrow-up"></i>
+              100,00 zł
+            </div>
+            <div class="col-md-12 col-sm-6 col-lg-6 d-flex">
+              <div class="ml-auto">
+                <small>26.08</small>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <small>Babcia mi dała</small>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item" style="background-color: #eaeaea;">
+          <div class="row">
+            <div class="col-md-12 col-sm-6 col-lg-6">
+              <i class="fas fa-arrow-down"></i>
+              30,00
+            </div>
+            <div class="col-md-12 col-sm-6 col-lg-6 d-flex">
+              <div class="ml-auto">
+                <small>26.08</small>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <small>liquor - funcking alcohol drink</small>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item" style="background-color: #eaeaea;">
+          <div class="row">
+            <div class="col-md-12 col-sm-6 col-lg-6">
+              <i class="fas fa-arrow-down"></i>
+              10,43
+            </div>
+            <div class="col-md-12 col-sm-6 col-lg-6 d-flex">
+              <div class="ml-auto">
+                <small>26.08</small>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <small>jedzenie</small>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item" style="background-color: #eaeaea;">Vestibulum at eros</li>
+        <li class="list-group-item" style="background-color: #f9f9f9;">Cras justo odio</li>
+        <li class="list-group-item" style="background-color: #f9f9f9;">Dapibus ac facilisis in</li>
+        <li class="list-group-item" style="background-color: #f9f9f9;">Morbi leo risus</li>
+        <li class="list-group-item" style="background-color: #f9f9f9;">Porta ac consectetur ac</li>
+        <li class="list-group-item">Vestibulum at eros</li>
+        <li class="list-group-item">Cras justo odio</li>
+        <li class="list-group-item">Dapibus ac facilisis in</li>
+        <li class="list-group-item">Morbi leo risus</li>
+        <li class="list-group-item">Porta ac consectetur ac</li>
+        <li class="list-group-item">Vestibulum at eros</li>
+      </ul>
     </div>
   </div>
 </div>
