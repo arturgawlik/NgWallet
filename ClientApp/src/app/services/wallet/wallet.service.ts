@@ -25,13 +25,43 @@ export class WalletService {
                 id: 1,
                 value: 200,
                 date: '20.03.2019',
-                description: 'od babci'
+                description: 'od babci',
+                currency: 'PLN'
             },
             {
                 id: 2,
                 value: -300,
                 date: '20.03.2019',
-                description: 'koka hera hasz lsd'
+                description: 'koka hera hasz lsd',
+                currency: 'PLN'
+            },
+            {
+                id: 3,
+                value: -300,
+                date: '20.03.2019',
+                description: 'koka hera hasz lsd',
+                currency: 'PLN'
+            },
+            {
+                id: 4,
+                value: -40,
+                date: '22.06.2018',
+                description: 'siłownia',
+                currency: 'PLN'
+            },
+            {
+                id: 5,
+                value: -3,
+                date: '05.03.2017',
+                description: 'zakupy',
+                currency: 'PLN'
+            },
+            {
+                id: 6,
+                value: 435,
+                date: '02.01.2017',
+                description: 'wypłata za filmy',
+                currency: 'PLN'
             }]
         });
     }

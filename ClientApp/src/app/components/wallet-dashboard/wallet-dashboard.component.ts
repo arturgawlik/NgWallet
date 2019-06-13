@@ -5,6 +5,7 @@ import { WalletService } from 'src/app/services/wallet/wallet.service';
 import { map } from 'rxjs/operators';
 import { WalletChange } from 'src/app/services/wallet/models/walletChange.model';
 import { WalletChartResult } from 'src/app/services/wallet/models/walletChartResult.model';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-wallet-dashboard',
@@ -17,13 +18,23 @@ export class WalletDashboardComponent implements OnInit {
 
   private wallet$: Observable<Wallet>
   private walletChartResult$: Observable<WalletChartResult>;
+  form: FormGroup;
 
-  constructor(private walletService: WalletService) {
+  constructor(private walletService: WalletService, private fb: FormBuilder) {
     this.wallet$ = this.walletService.getWallet(this.walletId);
     this.walletChartResult$ = this.walletService.getWalletChart(this.walletId);
+    this.initForm();
   }
 
   ngOnInit() {
+  }
+
+  initForm() {
+    this.form = this.fb.group({
+      operationType: ['outcome'],
+      currency: ['PLN'],
+      value: ['']
+    })
   }
 
   //#region template getters

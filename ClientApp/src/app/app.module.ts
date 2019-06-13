@@ -31,6 +31,7 @@ import { WalletDashboardComponent } from './components/wallet-dashboard/wallet-d
 import { WalletService } from './services/wallet/wallet.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartModule } from 'primeng/chart';
+import { AbsolutePipe } from './pipes/absolute.pipe';
 
 
 
@@ -51,7 +52,8 @@ import { ChartModule } from 'primeng/chart';
     AddCardRandomColorDirective,
     SignUpComponent,
     DashboardComponent,
-    WalletDashboardComponent
+    WalletDashboardComponent,
+    AbsolutePipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
