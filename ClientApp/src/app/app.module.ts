@@ -32,6 +32,8 @@ import { WalletService } from './services/wallet/wallet.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartModule } from 'primeng/chart';
 import { AbsolutePipe } from './pipes/absolute.pipe';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 
 
@@ -65,7 +67,9 @@ import { AbsolutePipe } from './pipes/absolute.pipe';
     AngularFireAuthModule,
     ReactiveFormsModule,
     AlertModule.forRoot(),
-    ChartModule
+    ButtonsModule.forRoot(),
+    ChartModule,
+    ScrollingModule
   ],
   providers: [AuthService, AuthGuard, LoginGuard, ApplicationHttpClient, WalletService],
   bootstrap: [AppComponent],

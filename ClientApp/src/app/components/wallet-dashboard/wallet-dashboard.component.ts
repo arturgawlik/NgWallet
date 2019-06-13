@@ -34,7 +34,7 @@ export class WalletDashboardComponent implements OnInit {
       operationType: ['outcome'],
       currency: ['PLN'],
       value: ['']
-    })
+    });
   }
 
   //#region template getters

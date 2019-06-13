@@ -15,8 +15,7 @@ export class WalletService {
     }
 
     getWallet(id: number): Observable<Wallet> {
-        // return this.http.get<Wallet>(`wallet/getWallet/${id}`)
-        return of({
+        const data = {
             id: 1,
             name: 'Portfel testowy',
             currentState: 150,
@@ -63,7 +62,19 @@ export class WalletService {
                 description: 'wypłata za filmy',
                 currency: 'PLN'
             }]
-        });
+        };
+
+        for (let index = 0; index < 10; index++) {
+            data.walletChanges.push({
+                id: 6,
+                value: 435,
+                date: '02.01.2017',
+                description: 'wypłata za filmy',
+                currency: 'PLN'
+            });
+        }
+
+        return of(data);
     }
 
     getWalletChart(id: number): Observable<WalletChartResult> {
