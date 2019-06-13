@@ -14,9 +14,9 @@
     </p-chart>
   </div>
   <div class="row">
-    <div class="p-2 col-sm-12 col-md-8 elem-h">
-      <form [formGroup]="form" style="height: 100%;">
-        <div class="form-group" style="width: 100%;height: 20%;">
+    <div class="p-2 col-sm-12 col-md-8 elem-h d-flex flex-column">
+      <form [formGroup]="form">
+        <div class="form-group" style="width: 100%;">
           <div class="btn-group" style="width: 100%" btnRadioGroup formControlName="operationType">
             <label btnRadio="outcome" class="btn btn-light" style="width: 50%" tabindex="0" role="button">
               <i class="fas fa-arrow-down"></i>
@@ -28,12 +28,15 @@
             </label>
           </div>
         </div>
-        <div class="form-group d-flex flex-column" style="height: 77%">
+        <div class="form-group">
+          <input type="text" class="form-control" id="inputDescription" formControlName="description" placeholder="piwo ">
+        </div>
+        <div class="form-group">
           <input type="number" class="form-control" id="inputValue" formControlName="value"
-            style="font-size: 8vh !important;" placeholder="0,00">
-          <button type="button" class="p-2 btn mt-auto btn-info btn-sm btn-block">Save</button>
+            style="font-size: 5vh !important;" placeholder="0,00">
         </div>
       </form>
+      <button type="button" class="p-2 btn mt-auto btn-info btn-sm btn-block">Save</button>
     </div>
     <div class="p-2 col-sm-12 col-md-4 elem-h" style="overflow-y: scroll">
       <ul class="list-group list-group-flush">

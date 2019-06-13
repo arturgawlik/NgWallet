@@ -33,7 +33,8 @@ export class WalletDashboardComponent implements OnInit {
     this.form = this.fb.group({
       operationType: ['outcome'],
       currency: ['PLN'],
-      value: ['']
+      value: [''],
+      description: [''],
     });
   }
 

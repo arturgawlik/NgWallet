@@ -1,5 +1,6 @@
 .elem-h {
     height: 40vh;
+    min-height: 250px;
 }
 
 .positive-c {
