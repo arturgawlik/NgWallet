@@ -1,10 +1,10 @@
 <div class="card-header d-flex">
   <div>
-    {{walletName$ | async}}
+    {{walletName$}}
   </div>
   <div class="ml-auto">
     <span class="badge badge-pill badge-info">
-      {{walletCurrentState$ | async}} {{walletCurrency$ | async}}
+      {{walletCurrentState$ | currency: walletCurrency$ + ' '}}
     </span>
   </div>
 </div>
@@ -45,17 +45,17 @@
           </div>
         </div>
       </form>
-      <button type="button" (click)="saveChange()" class="p-2 btn mt-auto btn-info btn-sm btn-block">Save</button>
+      <button type="button" (click)="saveChange()" class="p-2 btn mt-auto btn-info btn-sm btn-block" [disabled]="isChangeSaving">Save</button>
     </div>
     <div class="p-2 col-sm-12 col-md-4 elem-h" style="overflow-y: scroll">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item" *ngFor="let change of walletChanges$ | async" [class.positive-c]="change.value > 0"
+        <li class="list-group-item" *ngFor="let change of walletChanges$" [class.positive-c]="change.value > 0"
           [class.negative-c]="change.value < 0">
           <div class="row">
             <div class="col-md-12 col-sm-6 col-lg-6">
               <i *ngIf="change.value > 0" class="fas fa-arrow-up"></i>
               <i *ngIf="change.value < 0" class="fas fa-arrow-down"></i>
-              {{change.value | absolute | currency: change.currency + ' '}}
+              {{change.value | absolute | currency: walletCurrency$ + ' '}}
             </div>
             <div class="col-md-12 col-sm-6 col-lg-6 d-flex">
               <div class="ml-auto">

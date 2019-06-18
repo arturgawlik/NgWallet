@@ -1,10 +1,10 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ngWallet.DTOs.WalletChange;
+using ngWallet.DTOs.Response;
 using wallet.DTOs;
 using wallet.Models.Database;
+using ngWallet.Extensions;
 
 namespace wallet.Controllers
 {
@@ -45,6 +45,28 @@ namespace wallet.Controllers
             var entities = _db.Wallets.Where(x => x.ApplicationUserId == _appUser.Id).Select(x => new WalletDTO { Id = x.Id, Name = x.Name, Description = x.Description, FastAccess = x.FastAccess });
 
             return Json(entities);
+        }
+
+        public IActionResult GetWithChanges(int id)
+        {
+            var wallet = _db.Wallets.FirstOrDefault(x => x.Id == id);
+            var changes = _db.WalletValueChanges.Where(x => x.WalletId == id).ToList();
+
+            var responseChanges = changes.OrderByDescending(x => x.Date).Select(x => new WalletChangeResponse {
+                Id = x.Id,
+                Value = x.ChangeValue,
+                Date = x.Date.ToStringCustom(),
+                Description = x.Description
+            }).ToList();
+
+            var responseWallet = new WalletResponse();
+            responseWallet.Id = wallet.Id;
+            responseWallet.Name = wallet.Name;
+            responseWallet.Currency = "PLN"; // TODO
+            responseWallet.CurrentState = changes.Sum(x => x.ChangeValue);
+            responseWallet.WalletChanges = responseChanges;
+
+            return Json(responseWallet);
         }
 
         private void BuildEntity(Wallet entity, WalletDTO dto)

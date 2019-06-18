@@ -8,7 +8,7 @@ import { WalletChartResult } from 'src/app/services/wallet/models/walletChartRes
 import { FormBuilder, FormGroup, AbstractControl, Validators } from '@angular/forms';
 import { positiveNumberValidator } from 'src/app/validators/custom-validators';
 import { MessageService } from 'src/app/services/message/message.service';
- 
+
 @Component({
   selector: 'app-wallet-dashboard',
   templateUrl: './wallet-dashboard.component.html',
@@ -18,17 +18,16 @@ export class WalletDashboardComponent implements OnInit {
 
   @Input() walletId: number;
 
-  private wallet$: Observable<Wallet>
+  private wallet$: Wallet
   private walletChartResult$: Observable<WalletChartResult>;
   form: FormGroup;
+  isChangeSaving = false;
 
   constructor(private walletService: WalletService, private fb: FormBuilder, private messageService: MessageService) {
-    this.wallet$ = this.walletService.getWallet(this.walletId);
-    this.walletChartResult$ = this.walletService.getWalletChart(this.walletId);
-    
   }
 
   ngOnInit() {
+    this.fetchData();
     this.initForm();
   }
 
@@ -41,17 +40,26 @@ export class WalletDashboardComponent implements OnInit {
     });
   }
 
+  fetchData() {
+    this.walletService.getWallet(this.walletId).subscribe(x => this.wallet$ = x);
+    this.walletChartResult$ = this.walletService.getWalletChart(this.walletId);
+  }
+
   saveChange() {
     if (this.form.valid) {
       console.log(JSON.stringify(this.form.value));
+      this.isChangeSaving = true;
       this.walletService.saveChange(this.form.value).subscribe(
         s => {
           this.initForm();
+          this.fetchData();
           this.messageService.success(null, 'Wallet change is saved!');
+          this.isChangeSaving = false;
         },
         err => {
           this.messageService.error(null, 'Wallet change save errror...');
           console.log(JSON.stringify(err));
+          this.isChangeSaving = false;
         }
       )
     } else {
@@ -60,28 +68,43 @@ export class WalletDashboardComponent implements OnInit {
   }
 
   //#region template getters
-  get walletName$(): Observable<string> {
-    return this.wallet$.pipe(
-      map(w => w.name)
-    );
+  get walletName$(): string {
+    // return this.wallet$.pipe(
+    //   map(w => w.name)
+    // );
+    if (this.wallet$)
+      return this.wallet$.name;
+    else return null;
   }
 
-  get walletCurrentState$(): Observable<number> {
-    return this.wallet$.pipe(
-      map(w => w.currentState)
-    );
+  get walletCurrentState$(): number {
+    // return this.wallet$.pipe(
+    //   map(w => w.currentState)
+    // );
+    if (this.wallet$)
+      return this.wallet$.currentState;
+    else
+      return null;
   }
 
-  get walletCurrency$(): Observable<string> {
-    return this.wallet$.pipe(
-      map(w => w.currency)
-    );
+  get walletCurrency$(): string {
+    // return this.wallet$.pipe(
+    //   map(w => w.currency)
+    // );
+    if (this.wallet$)
+      return this.wallet$.currency;
+    else
+      return null;
   }
 
-  get walletChanges$(): Observable<WalletChange[]> {
-    return this.wallet$.pipe(
-      map(w => w.walletChanges)
-    );
+  get walletChanges$(): WalletChange[] {
+    // return this.wallet$.pipe(
+    //   map(w => w.walletChanges)
+    // );
+    if (this.wallet$)
+      return this.wallet$.walletChanges;
+    else
+      return null;
   }
 
   get walletChartData$(): Observable<any> {
