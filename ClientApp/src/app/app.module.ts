@@ -34,7 +34,9 @@ import { ChartModule } from 'primeng/chart';
 import { AbsolutePipe } from './pipes/absolute.pipe';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-
+import { ToastrModule } from 'ngx-toastr';
+import { MessageService } from './services/message/message.service';
+import { NotyfToast } from './services/message/notyfy.toast';
 
 
 @NgModule({
@@ -55,7 +57,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     SignUpComponent,
     DashboardComponent,
     WalletDashboardComponent,
-    AbsolutePipe
+    AbsolutePipe,
+    NotyfToast
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -69,9 +72,11 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     AlertModule.forRoot(),
     ButtonsModule.forRoot(),
     ChartModule,
-    ScrollingModule
+    ScrollingModule,
+    ToastrModule.forRoot()
   ],
-  providers: [AuthService, AuthGuard, LoginGuard, ApplicationHttpClient, WalletService],
+  entryComponents: [NotyfToast],
+  providers: [AuthService, AuthGuard, LoginGuard, ApplicationHttpClient, WalletService, MessageService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

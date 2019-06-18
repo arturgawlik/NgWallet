@@ -3,11 +3,16 @@ import { ApplicationHttpClient } from "../http/applicationHttpClientService.serv
 import { Observable, of } from "rxjs";
 import { Wallet } from "./models/wallet.model";
 import { WalletChartResult } from "./models/walletChartResult.model";
+import { WalletChangeSave } from "./models/walletChangeSave.model";
 
 @Injectable()
 export class WalletService {
 
     constructor(private http: ApplicationHttpClient) {
+    }
+
+    saveChange(data: WalletChangeSave) {
+        return this.http.post('walletChange/save', data);
     }
 
     getWalletsIds(): Observable<number[]> {

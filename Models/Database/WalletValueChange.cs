@@ -10,5 +10,6 @@ namespace wallet.Models.Database
         [Column(TypeName = "decimal(18,2)")]
         public decimal ChangeValue { get; set; }
         public DateTime Date { get; set; }
+        public string Description { get; set; }
     }
 }

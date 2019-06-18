@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
@@ -11,11 +11,12 @@ export class ShellComponent implements OnInit {
 
   sideBarVisible = false;
 
-  constructor(private authService: AuthService) {
+  constructor(private renderer: Renderer2, private authService: AuthService) {
   }
 
   ngOnInit() {
-    document.getElementsByTagName('body')[0].style.backgroundImage = null;
+    // document.getElementsByTagName('body')[0].style.backgroundImage = null;
+    this.renderer.removeStyle(document.body, 'backgroundImage');
   }
 
   logout() {

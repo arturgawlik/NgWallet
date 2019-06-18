@@ -3,5 +3,4 @@ export interface WalletChange {
     value: number;
     date: string;
     description: string;
-    currency: string;
 }

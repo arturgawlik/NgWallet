@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ApplicationHttpClient } from 'src/app/services/http/applicationHttpClientService.service';
 import { FormGroup, AbstractControl, FormBuilder } from '@angular/forms';
@@ -48,13 +48,13 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('loginPassword');
   }
 
-  constructor(private authService: AuthService, private fb: FormBuilder) {
+  constructor(private renderer: Renderer2, private authService: AuthService, private fb: FormBuilder) {
     this.buildLoginForm();
   }
 
   ngOnInit() {
     const imageIndex = Math.floor(Math.random() * (this.images.length - 1));
-    document.getElementsByTagName('body')[0].style.background = `url(${this.images[imageIndex]}) no-repeat center center fixed`;
+    this.renderer.setStyle(document.body, 'background', `url(${this.images[imageIndex]}) no-repeat center center fixed`);
   }
 
   private buildLoginForm() {

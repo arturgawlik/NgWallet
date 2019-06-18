@@ -5,12 +5,14 @@ import { WalletService } from 'src/app/services/wallet/wallet.service';
 import { map } from 'rxjs/operators';
 import { WalletChange } from 'src/app/services/wallet/models/walletChange.model';
 import { WalletChartResult } from 'src/app/services/wallet/models/walletChartResult.model';
-import { FormBuilder, FormGroup } from '@angular/forms';
-
+import { FormBuilder, FormGroup, AbstractControl, Validators } from '@angular/forms';
+import { positiveNumberValidator } from 'src/app/validators/custom-validators';
+import { MessageService } from 'src/app/services/message/message.service';
+ 
 @Component({
   selector: 'app-wallet-dashboard',
   templateUrl: './wallet-dashboard.component.html',
-  styleUrls: ['./wallet-dashboard.component.css']
+  styleUrls: ['./wallet-dashboard.component.css'],
 })
 export class WalletDashboardComponent implements OnInit {
 
@@ -20,22 +22,42 @@ export class WalletDashboardComponent implements OnInit {
   private walletChartResult$: Observable<WalletChartResult>;
   form: FormGroup;
 
-  constructor(private walletService: WalletService, private fb: FormBuilder) {
+  constructor(private walletService: WalletService, private fb: FormBuilder, private messageService: MessageService) {
     this.wallet$ = this.walletService.getWallet(this.walletId);
     this.walletChartResult$ = this.walletService.getWalletChart(this.walletId);
-    this.initForm();
+    
   }
 
   ngOnInit() {
+    this.initForm();
   }
 
   initForm() {
     this.form = this.fb.group({
       operationType: ['outcome'],
-      currency: ['PLN'],
-      value: [''],
+      value: ['', [Validators.required, positiveNumberValidator]],
       description: [''],
+      walletId: [this.walletId]
     });
+  }
+
+  saveChange() {
+    if (this.form.valid) {
+      //TODO prompts
+      console.log(JSON.stringify(this.form.value));
+      this.walletService.saveChange(this.form.value).subscribe(
+        s => {
+          this.initForm();
+          this.messageService.success('Success', 'Wallet change is saved!');
+        },
+        err => {
+          this.messageService.error('Error', 'Wallet change is saved!');
+          console.log(JSON.stringify(err));
+        }
+      )
+    } else {
+      this.formValue.markAsDirty();
+    }
   }
 
   //#region template getters
@@ -74,6 +96,12 @@ export class WalletDashboardComponent implements OnInit {
       map(r => r.options)
     );
   }
+
+  //form getters
+  get formValue(): AbstractControl {
+    return this.form.get('value');
+  }
+
   //#endregion
 
 }

@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ngWallet.DTOs.WalletChange;
 using wallet.DTOs;
 using wallet.Models.Database;
 
@@ -12,7 +13,7 @@ namespace wallet.Controllers
         DatabaseContext _db;
         // ApplicationUser _appUser;
         public WalletController(DatabaseContext db)
-        {
+    {
             _db = db;
             // _appUser = _db.ApplicationUsers.FirstOrDefault(x => x.FirebaseUserIdentity == _firebaseUserId);
         }
