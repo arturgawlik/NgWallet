@@ -43,15 +43,14 @@ export class WalletDashboardComponent implements OnInit {
 
   saveChange() {
     if (this.form.valid) {
-      //TODO prompts
       console.log(JSON.stringify(this.form.value));
       this.walletService.saveChange(this.form.value).subscribe(
         s => {
           this.initForm();
-          this.messageService.success('Success', 'Wallet change is saved!');
+          this.messageService.success(null, 'Wallet change is saved!');
         },
         err => {
-          this.messageService.error('Error', 'Wallet change is saved!');
+          this.messageService.error(null, 'Wallet change save errror...');
           console.log(JSON.stringify(err));
         }
       )
