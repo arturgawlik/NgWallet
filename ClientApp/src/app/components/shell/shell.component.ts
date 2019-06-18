@@ -15,9 +15,7 @@ export class ShellComponent implements OnInit {
   }
 
   ngOnInit() {
-    // document.getElementsByTagName('body')[0].style.backgroundImage = null;
     this.renderer.removeStyle(document.body, 'backgroundImage');
-    this.renderer.addClass(document.body, 'bootstrap');
   }
 
   logout() {

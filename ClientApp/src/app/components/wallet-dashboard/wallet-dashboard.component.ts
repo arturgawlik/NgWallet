@@ -19,7 +19,7 @@ export class WalletDashboardComponent implements OnInit {
   @Input() walletId: number;
 
   private wallet$: Wallet
-  private walletChartResult$: Observable<WalletChartResult>;
+  private walletChartResult$: WalletChartResult;
   form: FormGroup;
   isChangeSaving = false;
 
@@ -42,7 +42,7 @@ export class WalletDashboardComponent implements OnInit {
 
   fetchData() {
     this.walletService.getWallet(this.walletId).subscribe(x => this.wallet$ = x);
-    this.walletChartResult$ = this.walletService.getWalletChart(this.walletId);
+    this.walletService.getWalletChart(this.walletId).subscribe(x => {console.log(x); this.walletChartResult$ = x;});
   }
 
   saveChange() {
@@ -108,15 +108,23 @@ export class WalletDashboardComponent implements OnInit {
   }
 
   get walletChartData$(): Observable<any> {
-    return this.walletChartResult$.pipe(
-      map(r => r.data)
-    );
+    // return this.walletChartResult$.pipe(
+    //   map(r => r.data)
+    // );
+    if (this.walletChartResult$)
+      return this.walletChartResult$.data;
+    else
+      return null;
   }
 
   get walletChartOptions$(): Observable<any> {
-    return this.walletChartResult$.pipe(
-      map(r => r.options)
-    );
+    // return this.walletChartResult$.pipe(
+    //   map(r => r.options)
+    // );
+    if (this.walletChartResult$)
+      return this.walletChartResult$.options;
+    else
+      return null;
   }
 
   //form getters

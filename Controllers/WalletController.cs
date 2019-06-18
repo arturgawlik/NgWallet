@@ -5,6 +5,9 @@ using ngWallet.DTOs.Response;
 using wallet.DTOs;
 using wallet.Models.Database;
 using ngWallet.Extensions;
+using System.Collections.Generic;
+using System.Globalization;
+using System;
 
 namespace wallet.Controllers
 {
@@ -67,6 +70,31 @@ namespace wallet.Controllers
             responseWallet.WalletChanges = responseChanges;
 
             return Json(responseWallet);
+        }
+
+        public IActionResult PrimaryChart(int id)
+        {
+            var result = new List<PrimaryChartDataResponse>();
+            var changes = _db.WalletValueChanges.Where(x => x.WalletId == id).ToList();
+            var months = changes.GroupBy(x => new { x.Date.Year, x.Date.Month }).Select(x => x.Key);
+
+            foreach (var date in months)
+            {
+                var tmp = new PrimaryChartDataResponse();
+                tmp.Label = new DateTime(date.Year, date.Month, 1).ToString("MMMM yyyy");
+                tmp.Data = new List<decimal>();
+                
+                for (int i = 1; i <= DateTime.DaysInMonth(date.Year, date.Month); i++)
+                {
+                    if (new DateTime(date.Year, date.Month, i, 0, 0, 0) > DateTime.Now) //zeby nie rysowalo wykresu na "przyszlosc"
+                        break;
+                    tmp.Data.Add(changes.Where(x => x.Date <= new DateTime(date.Year, date.Month, i, 23, 59, 59)).Sum(x => x.ChangeValue));
+                }
+
+                result.Add(tmp);
+            }
+
+            return Json(result);
         }
 
         private void BuildEntity(Wallet entity, WalletDTO dto)

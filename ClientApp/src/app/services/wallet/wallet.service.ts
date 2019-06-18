@@ -4,6 +4,7 @@ import { Observable, of } from "rxjs";
 import { Wallet } from "./models/wallet.model";
 import { WalletChartResult } from "./models/walletChartResult.model";
 import { WalletChangeSave } from "./models/walletChangeSave.model";
+import { map } from "rxjs/operators";
 
 @Injectable()
 export class WalletService {
@@ -84,7 +85,7 @@ export class WalletService {
         return this.http.get<Wallet>(`wallet/getWithChanges/${id}`);
     }
 
-    getWalletChart(id: number): Observable<WalletChartResult> {
+    getWalletChartOld(id: number): Observable<WalletChartResult> {
         return of(
             {
                 data: {
@@ -113,6 +114,29 @@ export class WalletService {
                     }
                 }
             });
+    }
+
+    getWalletChart(id: number): Observable<WalletChartResult> {
+        return this.http.get<any>(`wallet/primaryChart/${id}`).pipe(
+            map(res => {
+                return {
+                    data: {
+                        labels: [1, '', '', '', '', '', '', '', '', 10, '', '', '', '', '', '', '', '', '', 20, '', '', '', '', '', '', '', '', '', 30, ''],
+                        datasets: res
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Wallet history',
+                            fontSize: 16
+                        },
+                        legend: {
+                            postition: 'bottom'
+                        }
+                    }
+                }
+            })
+        );
     }
 
 }
