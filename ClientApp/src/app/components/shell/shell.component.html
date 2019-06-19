@@ -4,9 +4,11 @@
   <div class="bg-light border-right" id="sidebar-wrapper">
     <div class="sidebar-heading text-center">_ngWallet </div>
     <div class="list-group list-group-flush">
-      <a href="javascript::void" [routerLink]="'/home'" (click)="sideBarVisible=false;" class="list-group-item list-group-item-action bg-light">Dashboard</a>
-      <a href="javascript::void" [routerLink]="'/wallets'" (click)="sideBarVisible=false;" class="list-group-item list-group-item-action bg-light">Wallets</a>
-      <a href="#" class="list-group-item list-group-item-action bg-light">Fast access</a>
+      <a href="javascript::void" [routerLink]="'/home'" (click)="sideBarVisible=false;"
+        class="list-group-item list-group-item-action bg-light">Dashboard</a>
+      <a href="javascript::void" [routerLink]="'/wallets'" (click)="sideBarVisible=false;"
+        class="list-group-item list-group-item-action bg-light">Wallets</a>
+      <a href="javascript::void" class="list-group-item list-group-item-action bg-light">Fast access</a>
     </div>
   </div>
   <!-- /#sidebar-wrapper -->
@@ -14,15 +16,16 @@
   <!-- Page Content -->
   <div id="page-content-wrapper">
     <nav class="navbar navbar-expand navbar-light bg-light border-bottom">
-      <button class="btn btn-light hidden-when-smol" (click)="sideBarVisible=true"><i class="fas fa-ellipsis-v"></i></button>
-        <ul class="navbar-nav ml-auto mt-0">
-          <li class="nav-item active">
-            <a class="nav-link" href="javascript::void"><i class="fas fa-sliders-h"></i><span class="sr-only"></span></a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="javascript::void" (click)="logout()"><i class="fas fa-sign-out-alt"></i></a>
-          </li>
-        </ul>
+      <button class="btn btn-light hidden-when-smol" (click)="sideBarVisible=true"><i
+          class="fas fa-ellipsis-v"></i></button>
+      <ul class="navbar-nav ml-auto mt-0">
+        <li class="nav-item active">
+          <a class="nav-link" href="javascript::void"><i class="fas fa-sliders-h"></i><span class="sr-only"></span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="javascript::void" (click)="logout()"><i class="fas fa-sign-out-alt"></i></a>
+        </li>
+      </ul>
     </nav>
 
     <div class="container-fluid">

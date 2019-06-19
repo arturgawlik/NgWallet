@@ -20,68 +20,11 @@ export class WalletService {
         return this.http.get<number[]>('wallet/getAllIds');
     }
 
+    getAllWallets(): Observable<Wallet[]> {
+        return this.http.get<Wallet[]>('wallet/getAll');
+    }
+
     getWallet(id: number): Observable<Wallet> {
-        // const data = {
-        //     id: 1,
-        //     name: 'Portfel testowy',
-        //     currentState: 150,
-        //     currency: 'zł',
-        //     walletChanges: [{
-        //         id: 1,
-        //         value: 200,
-        //         date: '20.03.2019',
-        //         description: 'od babci',
-        //         currency: 'PLN'
-        //     },
-        //     {
-        //         id: 2,
-        //         value: -300,
-        //         date: '20.03.2019',
-        //         description: 'koka hera hasz lsd',
-        //         currency: 'PLN'
-        //     },
-        //     {
-        //         id: 3,
-        //         value: -300,
-        //         date: '20.03.2019',
-        //         description: 'koka hera hasz lsd',
-        //         currency: 'PLN'
-        //     },
-        //     {
-        //         id: 4,
-        //         value: -40,
-        //         date: '22.06.2018',
-        //         description: 'siłownia',
-        //         currency: 'PLN'
-        //     },
-        //     {
-        //         id: 5,
-        //         value: -3,
-        //         date: '05.03.2017',
-        //         description: 'zakupy',
-        //         currency: 'PLN'
-        //     },
-        //     {
-        //         id: 6,
-        //         value: 435,
-        //         date: '02.01.2017',
-        //         description: 'wypłata za filmy',
-        //         currency: 'PLN'
-        //     }]
-        // };
-
-        // for (let index = 0; index < 10; index++) {
-        //     data.walletChanges.push({
-        //         id: 6,
-        //         value: 435,
-        //         date: '02.01.2017',
-        //         description: 'wypłata za filmy',
-        //         currency: 'PLN'
-        //     });
-        // }
-
-        // return of(data);
-
         return this.http.get<Wallet>(`wallet/getWithChanges/${id}`);
     }
 
@@ -122,7 +65,7 @@ export class WalletService {
                 return {
                     data: {
                         labels: [1, '', '', '', '', '', '', '', '', 10, '', '', '', '', '', '', '', '', '', 20, '', '', '', '', '', '', '', '', '', 30, ''],
-                        datasets: res
+                        datasets: res,
                     },
                     options: {
                         title: {
@@ -137,6 +80,10 @@ export class WalletService {
                 }
             })
         );
+    }
+
+    save(): Observable<any> {
+        return 
     }
 
 }

@@ -11,18 +11,14 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './guards/auth.guard';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginGuard } from './guards/login.guard';
 import { FeatherIconsPipe } from './pipes/feather-pipe';
-import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { HomeComponent } from './components/home/home.component';
 import { ApplicationHttpClient } from './services/http/applicationHttpClientService.service';
 import { WalletsComponent } from './components/wallets/wallets.component';
-// import { CardComponent } from './components/card/card.component';
 import { AddEditWalletComponent } from './components/add-edit-wallet/add-edit-wallet.component';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { AddIsValidIsInvalidClassDirective } from './directives/add-is-valid-is-invalid-class.directive';
-import { WalletOverviewComponent } from './components/wallet-overview/wallet-overview.component';
 import { AddCardRandomColorDirective } from './directives/add-card-random-color.directive';
 import { environment } from '../environments/environment';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
@@ -36,7 +32,6 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ToastrModule } from 'ngx-toastr';
 import { MessageService } from './services/message/message.service';
-import { NotyfToast } from './services/message/notyfy.toast';
 
 
 @NgModule({
@@ -44,21 +39,16 @@ import { NotyfToast } from './services/message/notyfy.toast';
     AppComponent,
     LoginComponent,
     ShellComponent,
-    NavbarComponent,
-    SideBarComponent,
     FeatherIconsPipe,
     HomeComponent,
     WalletsComponent,
-    // CardComponent,
     AddEditWalletComponent,
     AddIsValidIsInvalidClassDirective,
-    WalletOverviewComponent,
     AddCardRandomColorDirective,
     SignUpComponent,
     DashboardComponent,
     WalletDashboardComponent,
-    AbsolutePipe,
-    NotyfToast
+    AbsolutePipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -75,7 +65,6 @@ import { NotyfToast } from './services/message/notyfy.toast';
     ScrollingModule,
     ToastrModule.forRoot()
   ],
-  entryComponents: [NotyfToast],
   providers: [AuthService, AuthGuard, LoginGuard, ApplicationHttpClient, WalletService, MessageService],
   bootstrap: [AppComponent],
 })

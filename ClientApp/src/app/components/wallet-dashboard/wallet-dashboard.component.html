@@ -1,6 +1,8 @@
 <div class="card-header d-flex">
-  <div>
-    {{walletName$}}
+  <div class="col-sm-6 col-md-3">
+    <select class="form-control form-control-sm" [(ngModel)]="walletId" (ngModelChange)="fetchData()">
+      <option *ngFor="let wallet of allWallets; let i = index" [value]="wallet.id">{{wallet.name}}</option>
+    </select>
   </div>
   <div class="ml-auto">
     <span class="badge badge-pill badge-info">
@@ -14,7 +16,7 @@
     </p-chart>
   </div>
   <div class="row">
-    <div class="p-2 col-sm-12 col-md-8 elem-h d-flex flex-column">
+    <div class="p-2 col-sm-12 col-md-7 elem-h d-flex flex-column">
       <form [formGroup]="form">
         <div class="form-group" style="width: 100%;">
           <div class="btn-group" style="width: 100%" btnRadioGroup formControlName="operationType">
@@ -45,10 +47,11 @@
           </div>
         </div>
       </form>
-      <button type="button" (click)="saveChange()" class="p-2 btn mt-auto btn-info btn-sm btn-block" [disabled]="isChangeSaving">Save</button>
+      <button type="button" (click)="saveChange()" class="p-2 btn mt-auto btn-info btn-sm btn-block"
+        [disabled]="isChangeSaving">Save</button>
     </div>
-    <div class="p-2 col-sm-12 col-md-4 elem-h" style="overflow-y: scroll">
-      <ul class="list-group list-group-flush">
+    <div class="p-2 col-sm-12 col-md-5 elem-h" style="overflow-y: scroll">
+      <ul class="list-group list-group-flush" *ngIf="walletChanges$ && walletChanges$.length">
         <li class="list-group-item" *ngFor="let change of walletChanges$" [class.positive-c]="change.value > 0"
           [class.negative-c]="change.value < 0">
           <div class="row">
@@ -68,6 +71,9 @@
           </div>
         </li>
       </ul>
+      <div class="col-12 text-center text-muted p-2" *ngIf="!walletChanges$ || !walletChanges$.length">
+        For now there is nothing. Put some income/outcome to start using "{{walletName$}}".
+      </div>
     </div>
   </div>
 </div>

@@ -16,19 +16,24 @@ import { MessageService } from 'src/app/services/message/message.service';
 })
 export class WalletDashboardComponent implements OnInit {
 
-  @Input() walletId: number;
+  walletId: number;
 
   private wallet$: Wallet
   private walletChartResult$: WalletChartResult;
   form: FormGroup;
   isChangeSaving = false;
+  allWallets: Wallet[];
 
   constructor(private walletService: WalletService, private fb: FormBuilder, private messageService: MessageService) {
   }
 
   ngOnInit() {
-    this.fetchData();
     this.initForm();
+    this.walletService.getAllWallets().subscribe(r => {
+      this.allWallets = r;
+      this.walletId = r[0].id;
+      this.fetchData();
+    });
   }
 
   initForm() {
@@ -43,6 +48,7 @@ export class WalletDashboardComponent implements OnInit {
   fetchData() {
     this.walletService.getWallet(this.walletId).subscribe(x => this.wallet$ = x);
     this.walletService.getWalletChart(this.walletId).subscribe(x => {console.log(x); this.walletChartResult$ = x;});
+    this.initForm();
   }
 
   saveChange() {
