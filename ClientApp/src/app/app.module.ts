@@ -33,9 +33,8 @@ import { WalletDashboardComponent } from './components/wallet-dashboard/wallet-d
 
 
 
-
-// --------------------------------------app modules----------------------------------------------------    
 // -----------------------------------------------------------------------------------------------------  
+// --------------------------------------app modules----------------------------------------------------    
 // -----------------------------------------------------------------------------------------------------  
 import { RoutingModule } from './routing/routing.module';
 // -----------------------------------------------------------------------------------------------------  
@@ -86,6 +85,7 @@ import { LoginGuard } from './guards/login.guard';
 // --------------------------------------app directives-------------------------------------------------    
 // -----------------------------------------------------------------------------------------------------  
 import { AddIsValidIsInvalidClassDirective } from './directives/add-is-valid-is-invalid-class.directive';
+import { AddCardRandomColorDirective } from './directives/add-card-random-color.directive';
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------  
@@ -97,7 +97,6 @@ import { AddIsValidIsInvalidClassDirective } from './directives/add-is-valid-is-
 // --------------------------------------3rd part modules-----------------------------------------------    
 // -----------------------------------------------------------------------------------------------------  
 import { AlertModule } from 'ngx-bootstrap/alert';
-import { AddCardRandomColorDirective } from './directives/add-card-random-color.directive';
 import { ChartModule } from 'primeng/chart';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { ToastrModule } from 'ngx-toastr';
