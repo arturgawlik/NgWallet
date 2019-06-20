@@ -8,6 +8,7 @@ import { WalletChartResult } from 'src/app/services/wallet/models/walletChartRes
 import { FormBuilder, FormGroup, AbstractControl, Validators } from '@angular/forms';
 import { positiveNumberValidator } from 'src/app/validators/custom-validators';
 import { MessageService } from 'src/app/services/message/message.service';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-wallet-dashboard',
@@ -24,7 +25,7 @@ export class WalletDashboardComponent implements OnInit {
   isChangeSaving = false;
   allWallets: Wallet[];
 
-  constructor(private walletService: WalletService, private fb: FormBuilder, private messageService: MessageService) {
+  constructor(private walletService: WalletService, private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService) {
   }
 
   ngOnInit() {
@@ -47,7 +48,7 @@ export class WalletDashboardComponent implements OnInit {
 
   fetchData() {
     this.walletService.getWallet(this.walletId).subscribe(x => this.wallet$ = x);
-    this.walletService.getWalletChart(this.walletId).subscribe(x => {console.log(x); this.walletChartResult$ = x;});
+    this.walletService.getWalletChart(this.walletId).subscribe(x => { console.log(x); this.walletChartResult$ = x; });
     this.initForm();
   }
 
@@ -59,11 +60,11 @@ export class WalletDashboardComponent implements OnInit {
         s => {
           this.initForm();
           this.fetchData();
-          this.messageService.success(null, 'Wallet change is saved!');
+          this.messageService.success(null, 'Wallet change is saved successfull!');
           this.isChangeSaving = false;
         },
         err => {
-          this.messageService.error(null, 'Wallet change save errror...');
+          this.messageService.error(null, 'Something goes wrong while try to save change.');
           console.log(JSON.stringify(err));
           this.isChangeSaving = false;
         }
@@ -71,6 +72,26 @@ export class WalletDashboardComponent implements OnInit {
     } else {
       this.formValue.markAsDirty();
     }
+  }
+
+  removeChange(id: number) {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you remove this change?',
+      accept: () => {
+        this.walletService.removeChange(id).subscribe(
+          s => {
+            this.messageService.success(null, 'Change is successfull removed!');
+            this.fetchData();
+          },
+          err => {
+            this.messageService.error(null, 'Something goes wrong while try to remove change.');
+          }
+        )
+      },
+      reject: () => {
+        console.log('do not remove ' + id);
+      }
+  });
   }
 
   //#region template getters

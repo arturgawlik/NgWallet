@@ -83,7 +83,11 @@ export class WalletService {
     }
 
     save(): Observable<any> {
-        return 
+        return null; // TODO: move from component
+    }
+
+    removeChange(id: number) {
+        return this.http.delete(`walletChange/remove/${id}`);
     }
 
 }

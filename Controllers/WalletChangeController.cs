@@ -41,10 +41,27 @@ namespace wallet.Controllers
                 await _db.WalletValueChanges.AddAsync(entity);
                 await _db.SaveChangesAsync();
 
-                return Json(null);
+                return Ok();
             }
             else
                 return BadRequest();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Remove(int id)
+        {
+            var entity = _db.WalletValueChanges.FirstOrDefault(x => x.Id == id);
+            if (entity != null)
+            {
+                _db.Remove(entity);
+                await _db.SaveChangesAsync();
+
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         private void BuildEntity(WalletValueChange entity, WalletChangeDTO dto)

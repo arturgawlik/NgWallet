@@ -96,10 +96,13 @@ import { AddCardRandomColorDirective } from './directives/add-card-random-color.
 // -----------------------------------------------------------------------------------------------------  
 // --------------------------------------3rd part modules-----------------------------------------------    
 // -----------------------------------------------------------------------------------------------------  
-import { AlertModule } from 'ngx-bootstrap/alert';
-import { ChartModule } from 'primeng/chart';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { ToastrModule } from 'ngx-toastr';
+import { AlertModule } from 'ngx-bootstrap/alert';
+
+import { ChartModule } from 'primeng/chart';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------  
@@ -146,9 +149,10 @@ import { environment } from '../environments/environment';
     ButtonsModule.forRoot(),
     ChartModule,
     ScrollingModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    ConfirmDialogModule
   ],
-  providers: [AuthService, AuthGuard, LoginGuard, ApplicationHttpClient, WalletService, MessageService],
+  providers: [AuthService, AuthGuard, LoginGuard, ApplicationHttpClient, WalletService, MessageService, ConfirmationService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

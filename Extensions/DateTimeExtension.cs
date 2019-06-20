@@ -12,11 +12,11 @@ namespace ngWallet.Extensions
             {
                 if (date.Year == DateTime.Now.Year)
                 {
-                    return date.ToString("HH:mm, dd MMMM");
+                    return date.ToString("HH:mm, dd.MM");
                 }
                 else
                 {
-                    return date.ToString("HH:mm, dd MMMM yyyy");
+                    return date.ToString("HH:mm, dd.MM.yyyy");
                 }
             }
         }
