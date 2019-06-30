@@ -1,0 +1,59 @@
+<div class="d-flex justify-content-center">
+    <div class="col-12 p-2">
+        <div class="card">
+            <div class="card-header d-flex">
+                Categories definition
+            </div>
+            <div class="card-body">
+                <div>
+                    <p-table *ngIf="categories && categories.length" [value]="categories" [scrollable]="true"
+                        scrollHeight="250px">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th colspan="6">Name</th>
+                                <th colspan="3">Color</th>
+                                <th colspan="3">Action</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-category>
+                            <tr>
+                                <td colspan="6">
+                                    {{category.name}}
+                                </td>
+                                <td colspan="3">
+                                    <div style="height: 20px; width: 20px; background-color: blueviolet; border-radius: 100%"></div>
+                                </td>
+                                <td colspan="3">
+                                    <a style="cursor: pointer" class="p-1" (click)="editBtnClick(category)"><i
+                                            class="fas fa-edit"></i></a>
+                                    <a style="cursor: pointer;" class="p-1" (click)="removeBtnClick(category.id)"><i
+                                            class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+                <hr>
+                <div>
+                    <h4 class="mb-2">{{actualAction}}</h4>
+                    <form class="form-inline" [formGroup]="form">
+                        <div class="form-group mb-2 mr-2 flex-fill no-padding">
+                            <label for="category-definition" class="sr-only">Category Name</label>
+                            <input [validationMsg]="name" formControlName="name" type="text" class="form-control"
+                                id="category-definition" placeholder="Category Name" style="width: 100%">
+                        </div>
+                        <div class="form-group mb-2 mr-2 no-padding">
+                            <p-colorPicker formControlName="color"></p-colorPicker>
+                        </div>
+                        <button class="btn btn-info mb-2 ml-auto mr-2" (click)="save()">Save</button>
+                        <button class="btn btn-link mb-2" (click)="reset()"><i class="fas fa-times"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Confirmation modal-->
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

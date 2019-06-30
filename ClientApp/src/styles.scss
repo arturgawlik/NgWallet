@@ -7,3 +7,8 @@ body {
 @import '~bootstrap/scss/bootstrap';
 
 @import '~ngx-toastr/toastr-bs4-alert';
+
+
+.no-padding {
+    padding: 0 !important;
+}

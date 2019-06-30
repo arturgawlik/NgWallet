@@ -3,38 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using wallet.Models.Database;
 
 namespace wallet.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20190621185452_add-fk")]
+    partial class addfk
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("ngWallet.Models.Database.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ApplicationUserId");
-
-                    b.Property<string>("Color");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categorys");
-                });
 
             modelBuilder.Entity("wallet.Models.Database.ApplicationUser", b =>
                 {
@@ -89,8 +74,6 @@ namespace wallet.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
-
                     b.HasIndex("WalletId");
 
                     b.ToTable("WalletValueChanges");
@@ -106,10 +89,6 @@ namespace wallet.Migrations
 
             modelBuilder.Entity("wallet.Models.Database.WalletValueChange", b =>
                 {
-                    b.HasOne("ngWallet.Models.Database.Category")
-                        .WithMany("WalletValueChanges")
-                        .HasForeignKey("CategoryId");
-
                     b.HasOne("wallet.Models.Database.Wallet")
                         .WithMany("WalletValueChanges")
                         .HasForeignKey("WalletId")

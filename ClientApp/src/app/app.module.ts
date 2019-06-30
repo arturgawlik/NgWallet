@@ -27,6 +27,7 @@ import { WalletsComponent } from './components/wallets/wallets.component';
 import { AddEditWalletComponent } from './components/add-edit-wallet/add-edit-wallet.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { WalletDashboardComponent } from './components/wallet-dashboard/wallet-dashboard.component';
+import { CategoriesDefinitionComponent } from './components/categories-definition/categories-definition.component';
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------         
@@ -51,6 +52,7 @@ import { AuthService } from './services/auth/auth.service';
 import { WalletService } from './services/wallet/wallet.service';
 import { ApplicationHttpClient } from './services/http/applicationHttpClientService.service';
 import { MessageService } from './services/message/message.service';
+import { CategoryService } from './services/category/category.service';
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------         
@@ -103,6 +105,8 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { ChartModule } from 'primeng/chart';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { TableModule } from 'primeng/table';
+import { ColorPickerModule } from 'primeng/colorpicker';
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------  
@@ -114,6 +118,7 @@ import { ConfirmationService } from 'primeng/api';
 // --------------------------------------settings-------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------      
 import { environment } from '../environments/environment';
+import { ValidationMessages } from './directives/validation-massages.directive';
 // -----------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------  
@@ -134,7 +139,9 @@ import { environment } from '../environments/environment';
     AddCardRandomColorDirective,
     SignUpComponent,
     WalletDashboardComponent,
-    AbsolutePipe
+    AbsolutePipe,
+    CategoriesDefinitionComponent,
+    ValidationMessages
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -150,9 +157,11 @@ import { environment } from '../environments/environment';
     ChartModule,
     ScrollingModule,
     ToastrModule.forRoot(),
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    TableModule,
+    ColorPickerModule
   ],
-  providers: [AuthService, AuthGuard, LoginGuard, ApplicationHttpClient, WalletService, MessageService, ConfirmationService],
+  providers: [AuthService, AuthGuard, LoginGuard, ApplicationHttpClient, WalletService, MessageService, ConfirmationService, CategoryService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -81,6 +81,7 @@ namespace wallet.Controllers
             entity.Date = DateTime.Now;
             entity.WalletId = dto.WalletId;
             entity.Description = dto.Description;
+            entity.CategoryId = dto.CategoryId;
         }
     }
 }

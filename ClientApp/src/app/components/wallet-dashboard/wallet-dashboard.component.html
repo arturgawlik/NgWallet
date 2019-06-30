@@ -1,86 +1,88 @@
-<div class="card-header d-flex">
-  <div class="col-sm-6 col-md-3">
-    <select class="form-control form-control-sm" [(ngModel)]="walletId" (ngModelChange)="fetchData()">
-      <option *ngFor="let wallet of allWallets; let i = index" [value]="wallet.id">{{wallet.name}}</option>
-    </select>
-  </div>
-  <div class="ml-auto">
-    <span class="badge badge-pill badge-info">
-      {{walletCurrentState$ | currency: walletCurrency$ + ' '}}
-    </span>
-  </div>
-</div>
-<div class="card-body">
-  <div>
-    <p-chart type="line" [data]="walletChartData$" height="35vh">
-    </p-chart>
-  </div>
-  <div class="row">
-    <div class="p-2 col-sm-12 col-md-7 elem-h d-flex flex-column">
-      <form [formGroup]="form">
-        <div class="form-group" style="width: 100%;">
-          <div class="btn-group" style="width: 100%" btnRadioGroup formControlName="operationType">
-            <label btnRadio="outcome" class="btn btn-light" style="width: 50%" tabindex="0" role="button">
-              <i class="fas fa-arrow-down"></i>
-              Outcome
-            </label>
-            <label btnRadio="income" class="btn btn-light" style="width: 50%" tabindex="0" role="button">
-              <i class="fas fa-arrow-up"></i>
-              Income
-            </label>
-          </div>
+<div class="d-flex justify-content-center">
+  <div class="col-12 p-2">
+    <div class="card">
+      <div class="card-header d-flex">
+        <div class="col-sm-6 col-md-3">
+          <select class="form-control form-control-sm" [(ngModel)]="walletId" (ngModelChange)="fetchData()">
+            <option *ngFor="let wallet of allWallets; let i = index" [value]="wallet.id">{{wallet.name}}</option>
+          </select>
         </div>
-        <div class="form-group">
-          <input type="text" class="form-control" id="inputDescription" formControlName="description"
-            placeholder="Description">
+        <div class="ml-auto">
+          <span class="badge badge-pill badge-info">
+            {{walletCurrentState$ | currency: walletCurrency$ + ' '}}
+          </span>
         </div>
-        <div class="form-group">
-          <input type="number" class="form-control" id="inputValue" formControlName="value"
-            style="font-size: 5vh !important;" placeholder="0,00"
-            [class.is-invalid]="formValue.invalid && (formValue.touched || formValue.dirty)">
-          <div *ngIf="formValue.errors?.required && (formValue.touched || formValue.dirty)" class="invalid-feedback">
-            Value is required!
-          </div>
-          <div *ngIf="formValue.errors?.positiveNumber && (formValue.touched || formValue.dirty)"
-            class="invalid-feedback">
-            Value must be positive number!
-          </div>
+      </div>
+      <div class="card-body">
+        <div>
+          <p-chart type="line" [data]="walletChartData$" height="35vh">
+          </p-chart>
         </div>
-      </form>
-      <button type="button" (click)="saveChange()" class="p-2 btn mt-auto btn-info btn-sm btn-block"
-        [disabled]="isChangeSaving">Save</button>
-    </div>
-    <div class="p-2 col-sm-12 col-md-5 elem-h" style="overflow-y: scroll">
-      <ul class="list-group list-group-flush" *ngIf="walletChanges$ && walletChanges$.length">
-        <li class="list-group-item" *ngFor="let change of walletChanges$" [class.positive-c]="change.value > 0"
-          [class.negative-c]="change.value < 0">
-          <div class="row">
-            <div class="col-6 col-md-12 col-sm-6 col-lg-6">
-              <i *ngIf="change.value > 0" class="fas fa-arrow-up"></i>
-              <i *ngIf="change.value < 0" class="fas fa-arrow-down"></i>
-              {{change.value | absolute | currency: walletCurrency$ + ' '}}
-            </div>
-            <div class="col-6 col-md-12 col-sm-6 col-lg-6 d-flex">
-              <div class="ml-auto">
-                <small>{{change.date}}</small>
+        <div class="row">
+          <div class="p-2 col-sm-12 col-md-7 elem-h d-flex flex-column">
+            <form [formGroup]="form">
+              <div class="form-group" style="width: 100%;">
+                <div class="btn-group" style="width: 100%" btnRadioGroup formControlName="operationType">
+                  <label btnRadio="outcome" class="btn btn-light" style="width: 50%" tabindex="0" role="button"
+                    style="cursor: pointer">
+                    <i class="fas fa-arrow-down"></i>
+                    Outcome
+                  </label>
+                  <label btnRadio="income" class="btn btn-light" style="width: 50%" tabindex="0" role="button"
+                    style="cursor: pointer">
+                    <i class="fas fa-arrow-up"></i>
+                    Income
+                  </label>
+                </div>
               </div>
-            </div>
-            <div class="col-10 col-md-11">
-              <small>{{change.description}}</small>
-            </div>
-            <div class="col-2 col-md-1 p-2">
-              <a style="cursor: pointer;" (click)="removeChange(change.id)"><i class="fas fa-trash-alt"></i></a>
+              <div class="form-group">
+                <input type="text" class="form-control" id="inputDescription" formControlName="description"
+                  placeholder="Description">
+              </div>
+              <div class="form-group">
+                <input type="number" class="form-control" id="inputValue" formControlName="value"
+                  style="font-size: 5vh !important;" placeholder="0,00"
+                  [validationMsg]="formValue"
+                  [errMsgs]="[{k: 'required', v: 'Value is required!'}, {k: 'positiveNumber', v:'Value must be positive number!'}]"
+                  >
+              </div>
+            </form>
+            <button type="button" (click)="saveChange()" class="p-2 btn mt-auto btn-info btn-sm btn-block"
+              [disabled]="isChangeSaving">Save</button>
+          </div>
+          <div class="p-2 col-sm-12 col-md-5 elem-h" style="overflow-y: scroll">
+            <ul class="list-group list-group-flush" *ngIf="walletChanges$ && walletChanges$.length">
+              <li class="list-group-item" *ngFor="let change of walletChanges$" [class.positive-c]="change.value > 0"
+                [class.negative-c]="change.value < 0">
+                <div class="row">
+                  <div class="col-6 col-md-12 col-sm-6 col-lg-6">
+                    <i *ngIf="change.value > 0" class="fas fa-arrow-up"></i>
+                    <i *ngIf="change.value < 0" class="fas fa-arrow-down"></i>
+                    {{change.value | absolute | currency: walletCurrency$ + ' '}}
+                  </div>
+                  <div class="col-6 col-md-12 col-sm-6 col-lg-6 d-flex">
+                    <div class="ml-auto">
+                      <small>{{change.date}}</small>
+                    </div>
+                  </div>
+                  <div class="col-10 col-md-11">
+                    <small>{{change.description}}</small>
+                  </div>
+                  <div class="col-2 col-md-1 p-2">
+                    <a style="cursor: pointer;" (click)="removeChange(change.id)"><i class="fas fa-trash-alt"></i></a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div class="col-12 text-center text-muted p-2" *ngIf="!walletChanges$ || !walletChanges$.length">
+              For now there is nothing. Put some income/outcome to start using "{{walletName$}}".
             </div>
           </div>
-        </li>
-      </ul>
-      <div class="col-12 text-center text-muted p-2" *ngIf="!walletChanges$ || !walletChanges$.length">
-        For now there is nothing. Put some income/outcome to start using "{{walletName$}}".
+        </div>
       </div>
     </div>
   </div>
 </div>
-
 
 
 <!--Confirmation modal-->

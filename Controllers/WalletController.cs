@@ -31,7 +31,7 @@ namespace wallet.Controllers
             BuildEntity(entity, dto);
             await _db.Wallets.AddAsync(entity);
             await _db.SaveChangesAsync();
-            return Json(null);
+            return Ok();
         }
 
         public IActionResult IsNameOccupied(string name)

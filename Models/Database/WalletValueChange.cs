@@ -7,9 +7,11 @@ namespace wallet.Models.Database
     {
         public int Id { get; set; }
         public int WalletId { get; set; }
+        public int? CategoryId { get; set; }
         [Column(TypeName = "decimal(18,2)")]
         public decimal ChangeValue { get; set; }
         public DateTime Date { get; set; }
         public string Description { get; set; }
+
     }
 }
