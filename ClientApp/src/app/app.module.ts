@@ -28,6 +28,7 @@ import { AddEditWalletComponent } from './components/add-edit-wallet/add-edit-wa
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { WalletDashboardComponent } from './components/wallet-dashboard/wallet-dashboard.component';
 import { CategoriesDefinitionComponent } from './components/categories-definition/categories-definition.component';
+import { ColorComponent } from './components/color/color.component';
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------         
@@ -141,7 +142,8 @@ import { ValidationMessages } from './directives/validation-massages.directive';
     WalletDashboardComponent,
     AbsolutePipe,
     CategoriesDefinitionComponent,
-    ValidationMessages
+    ValidationMessages,
+    ColorComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

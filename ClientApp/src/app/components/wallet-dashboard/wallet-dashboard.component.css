@@ -1,6 +1,6 @@
 .elem-h {
     height: 40vh;
-    min-height: 250px;
+    min-height: 350px;
 }
 
 .positive-c {
@@ -9,4 +9,8 @@
 
 .negative-c {
     background-color: #eaeaea;
+}
+
+.no-padding-bottom {
+    padding-bottom: 0 !important;
 }

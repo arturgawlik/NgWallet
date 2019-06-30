@@ -9,6 +9,8 @@ import { FormBuilder, FormGroup, AbstractControl, Validators } from '@angular/fo
 import { positiveNumberValidator } from 'src/app/validators/custom-validators';
 import { MessageService } from 'src/app/services/message/message.service';
 import { ConfirmationService } from 'primeng/api';
+import { Category } from 'src/app/services/category/models/category.model';
+import { CategoryService } from 'src/app/services/category/category.service';
 
 @Component({
   selector: 'app-wallet-dashboard',
@@ -24,8 +26,9 @@ export class WalletDashboardComponent implements OnInit {
   form: FormGroup;
   isChangeSaving = false;
   allWallets: Wallet[];
+  categories: Category[];
 
-  constructor(private walletService: WalletService, private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService) {
+  constructor(private walletService: WalletService, private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private categoryService: CategoryService) {
   }
 
   ngOnInit() {
@@ -35,6 +38,9 @@ export class WalletDashboardComponent implements OnInit {
       this.walletId = r[0].id;
       this.fetchData();
     });
+    this.categoryService.fetchAll().subscribe(r => {
+      this.categories = r;
+    });
   }
 
   initForm() {
@@ -42,6 +48,7 @@ export class WalletDashboardComponent implements OnInit {
       operationType: ['outcome'],
       value: ['', [Validators.required, positiveNumberValidator]],
       description: [''],
+      category: ['', Validators.required],
       walletId: [this.walletId]
     });
   }
@@ -71,6 +78,7 @@ export class WalletDashboardComponent implements OnInit {
       )
     } else {
       this.formValue.markAsDirty();
+      this.formCategory.markAsDirty();
     }
   }
 
@@ -91,7 +99,7 @@ export class WalletDashboardComponent implements OnInit {
       reject: () => {
         console.log('do not remove ' + id);
       }
-  });
+    });
   }
 
   //#region template getters
@@ -157,6 +165,10 @@ export class WalletDashboardComponent implements OnInit {
   //form getters
   get formValue(): AbstractControl {
     return this.form.get('value');
+  }
+
+  get formCategory(): AbstractControl {
+    return this.form.get('category');
   }
 
   //#endregion

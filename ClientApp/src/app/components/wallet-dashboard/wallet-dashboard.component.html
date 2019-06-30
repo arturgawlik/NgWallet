@@ -19,7 +19,7 @@
           </p-chart>
         </div>
         <div class="row">
-          <div class="p-2 col-sm-12 col-md-7 elem-h d-flex flex-column">
+          <div class="p-2 col-sm-12 col-md-7 elem-h d-flex flex-column no-padding-bottom">
             <form [formGroup]="form">
               <div class="form-group" style="width: 100%;">
                 <div class="btn-group" style="width: 100%" btnRadioGroup formControlName="operationType">
@@ -40,11 +40,17 @@
                   placeholder="Description">
               </div>
               <div class="form-group">
+                <select 
+                [validationMsg]="formCategory"
+                [errMsgs]="[{k: 'required', v: 'Category is required!'}]"
+                class="form-control" formControlName="category">
+                  <option *ngFor="let category of categories; let i = index" [value]="category.id">{{category.name}}</option>
+                </select>
+              </div>
+              <div class="form-group">
                 <input type="number" class="form-control" id="inputValue" formControlName="value"
-                  style="font-size: 5vh !important;" placeholder="0,00"
-                  [validationMsg]="formValue"
-                  [errMsgs]="[{k: 'required', v: 'Value is required!'}, {k: 'positiveNumber', v:'Value must be positive number!'}]"
-                  >
+                  style="font-size: 5vh !important;" placeholder="0,00" [validationMsg]="formValue"
+                  [errMsgs]="[{k: 'required', v: 'Value is required!'}, {k: 'positiveNumber', v:'Value must be positive number!'}]">
               </div>
             </form>
             <button type="button" (click)="saveChange()" class="p-2 btn mt-auto btn-info btn-sm btn-block"
@@ -52,7 +58,8 @@
           </div>
           <div class="p-2 col-sm-12 col-md-5 elem-h" style="overflow-y: scroll">
             <ul class="list-group list-group-flush" *ngIf="walletChanges$ && walletChanges$.length">
-              <li class="list-group-item" *ngFor="let change of walletChanges$" [class.positive-c]="change.value > 0"
+              <li style="background-image: linear-gradient(0.25turn, orange , #eaeaea 50%);" class="list-group-item"
+                *ngFor="let change of walletChanges$" [class.positive-c]="change.value > 0"
                 [class.negative-c]="change.value < 0">
                 <div class="row">
                   <div class="col-6 col-md-12 col-sm-6 col-lg-6">

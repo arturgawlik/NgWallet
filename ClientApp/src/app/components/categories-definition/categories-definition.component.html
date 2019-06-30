@@ -21,7 +21,7 @@
                                     {{category.name}}
                                 </td>
                                 <td colspan="3">
-                                    <div style="height: 20px; width: 20px; background-color: blueviolet; border-radius: 100%"></div>
+                                    <app-color [bgColor]="category.color"></app-color>
                                 </td>
                                 <td colspan="3">
                                     <a style="cursor: pointer" class="p-1" (click)="editBtnClick(category)"><i
