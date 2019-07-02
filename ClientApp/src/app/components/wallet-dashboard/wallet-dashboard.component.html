@@ -42,8 +42,9 @@
               <div class="form-group">
                 <select 
                 [validationMsg]="formCategory"
+                formControlName="categoryId"
                 [errMsgs]="[{k: 'required', v: 'Category is required!'}]"
-                class="form-control" formControlName="category">
+                class="form-control" title="Category">
                   <option *ngFor="let category of categories; let i = index" [value]="category.id">{{category.name}}</option>
                 </select>
               </div>
@@ -58,9 +59,12 @@
           </div>
           <div class="p-2 col-sm-12 col-md-5 elem-h" style="overflow-y: scroll">
             <ul class="list-group list-group-flush" *ngIf="walletChanges$ && walletChanges$.length">
-              <li style="background-image: linear-gradient(0.25turn, orange , #eaeaea 50%);" class="list-group-item"
+              <li  class="list-group-item"
                 *ngFor="let change of walletChanges$" [class.positive-c]="change.value > 0"
-                [class.negative-c]="change.value < 0">
+                [class.negative-c]="change.value < 0"
+                [gradient]="change.color"
+                [title]="change.category"
+                >
                 <div class="row">
                   <div class="col-6 col-md-12 col-sm-6 col-lg-6">
                     <i *ngIf="change.value > 0" class="fas fa-arrow-up"></i>

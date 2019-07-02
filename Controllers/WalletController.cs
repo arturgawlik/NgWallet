@@ -54,12 +54,15 @@ namespace wallet.Controllers
         {
             var wallet = _db.Wallets.FirstOrDefault(x => x.Id == id);
             var changes = _db.WalletValueChanges.Where(x => x.WalletId == id).ToList();
+            var categories = _db.Categorys.ToList();
 
             var responseChanges = changes.OrderByDescending(x => x.Date).Select(x => new WalletChangeResponse {
                 Id = x.Id,
                 Value = x.ChangeValue,
                 Date = x.Date.ToStringCustom(),
-                Description = x.Description
+                Description = x.Description,
+                Color = categories.FirstOrDefault(y => y.Id == x.CategoryId)?.Color,
+                Category = categories.FirstOrDefault(y => y.Id == x.CategoryId)?.Name
             }).ToList();
 
             var responseWallet = new WalletResponse();

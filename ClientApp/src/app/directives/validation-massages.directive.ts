@@ -54,7 +54,7 @@ export class ValidationMessages implements OnInit, DoCheck {
     }
 
     private createErrElem(errMsg: string) {
-        const divElem = this.renderer.createElement('div');
+        const divElem = this.renderer.createElement('div') as HTMLDivElement;
         divElem.classList.add('invalid-feedback');
         divElem.textContent = errMsg;
 

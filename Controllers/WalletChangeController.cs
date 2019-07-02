@@ -82,6 +82,7 @@ namespace wallet.Controllers
             entity.WalletId = dto.WalletId;
             entity.Description = dto.Description;
             entity.CategoryId = dto.CategoryId;
+            entity.CategoryId = dto.CategoryId;
         }
     }
 }

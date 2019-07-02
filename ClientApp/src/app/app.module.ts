@@ -89,6 +89,7 @@ import { LoginGuard } from './guards/login.guard';
 // -----------------------------------------------------------------------------------------------------  
 import { AddIsValidIsInvalidClassDirective } from './directives/add-is-valid-is-invalid-class.directive';
 import { AddCardRandomColorDirective } from './directives/add-card-random-color.directive';
+import { GradientDirective } from './directives/gradient.directive';
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------  
@@ -143,7 +144,8 @@ import { ValidationMessages } from './directives/validation-massages.directive';
     AbsolutePipe,
     CategoriesDefinitionComponent,
     ValidationMessages,
-    ColorComponent
+    ColorComponent,
+    GradientDirective
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

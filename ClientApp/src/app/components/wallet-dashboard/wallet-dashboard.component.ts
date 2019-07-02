@@ -48,7 +48,7 @@ export class WalletDashboardComponent implements OnInit {
       operationType: ['outcome'],
       value: ['', [Validators.required, positiveNumberValidator]],
       description: [''],
-      category: ['', Validators.required],
+      categoryId: ['', Validators.required],
       walletId: [this.walletId]
     });
   }
@@ -168,7 +168,7 @@ export class WalletDashboardComponent implements OnInit {
   }
 
   get formCategory(): AbstractControl {
-    return this.form.get('category');
+    return this.form.get('categoryId');
   }
 
   //#endregion
