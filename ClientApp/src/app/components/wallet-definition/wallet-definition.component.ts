@@ -1,11 +1,13 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, FormArray, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
-import { Wallet } from 'src/app/models/wallet';
 import { ApplicationHttpClient } from 'src/app/services/http/applicationHttpClientService.service';
 import { EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
+import { WalletService } from 'src/app/services/wallet/wallet.service';
+import { Wallet } from 'src/app/services/wallet/models/wallet.model';
+import { MessageService } from 'src/app/services/message/message.service';
 
 @Component({
   selector: 'app-wallet-definition',
@@ -14,48 +16,40 @@ import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
 })
 export class WalletDefinitionComponent {
 
-  @Input() wallet: Wallet;
-  @Output() walletSaved = new EventEmitter<any>();
+  wallets: Wallet[];
 
-  alerts: any[] = [];
-  
   walletForm: FormGroup;
 
-  get name() {
-    return this.walletForm.get('Name');
+  constructor(private fb: FormBuilder, private httpClient: ApplicationHttpClient, private walletService: WalletService, private messageService: MessageService) {
+    this.initForm(null);
+    this.fetchWallets();
   }
 
-  constructor(private fb: FormBuilder, private httpClient: ApplicationHttpClient){
-    this.init();
-    this.walletForm.valueChanges.subscribe(() => {
-    });
-  }
-
-  init() {
-    if (!this.wallet) {
-      this.wallet = new Wallet();
-      this.wallet.fastAccess = true;
+  initForm(wallet: any) {
+    if (!wallet) {
+      wallet = {};
+      wallet.fastAccess = true;
     }
 
     this.walletForm = this.fb.group({
-      Id: [this.wallet.id],
-      Name: [this.wallet.name, [Validators.required], [this.walletNameOccupied.bind(this)]],
-      Description: [this.wallet.description],
-      FastAccess: [this.wallet.fastAccess]
+      Id: [wallet.id],
+      Name: [wallet.name, [Validators.required], [this.walletNameOccupied.bind(this)]],
+      Description: [wallet.description],
+      FastAccess: [wallet.fastAccess]
     });
   }
 
   formSubmit() {
     if (this.walletForm.valid) {
-      this.httpClient.post('/wallet/save', this.walletForm.value).subscribe(
+      this.walletService.save((this.walletForm.value as Wallet)).subscribe(
         response => {
-          this.walletSaved.emit(null);
-          this.init();
-          this.alerts.push({
-            type: 'success',
-            msg: 'Your wallet was successful saved!',
-            timeout: 5000
-          });
+          this.initForm(null);
+          this.messageService.success(null, 'Wallet is saved successfull!');
+          this.fetchWallets();
+        },
+        err => {
+          this.messageService.error(null, 'Something goes wrong while try to save wallet.');
+          console.log(JSON.stringify(err));
         }
       )
     } else {
@@ -63,11 +57,35 @@ export class WalletDefinitionComponent {
     }
   }
 
+  editBtnClick(wallet: Wallet) {
+
+  }
+
+  fetchWallets() {
+    this.walletService.fetchAll().subscribe(
+      res => {
+        this.wallets = res;
+      },
+      err => {
+
+      }
+    );
+  }
+
+
+
+  get name() {
+    return this.walletForm.get('Name');
+  }
+
+
   // validators
   walletNameOccupied(ctrl: AbstractControl): Observable<ValidationErrors | null> {
     return this.httpClient.get(`/wallet/isNameOccupied?name=${ctrl.value}`).pipe(
-        map(isOccupied => (isOccupied ? { nameOccupied: true } : null)),
-        catchError(() => null)
+      map(isOccupied => (isOccupied ? { nameOccupied: true } : null)),
+      catchError(() => null)
     );
+  }
 }
-}
+
+

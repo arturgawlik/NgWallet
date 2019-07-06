@@ -20,7 +20,7 @@ export class WalletService {
         return this.http.get<number[]>('wallet/getAllIds');
     }
 
-    getAllWallets(): Observable<Wallet[]> {
+    fetchAll(): Observable<Wallet[]> {
         return this.http.get<Wallet[]>('wallet/getAll');
     }
 
@@ -82,8 +82,8 @@ export class WalletService {
         );
     }
 
-    save(): Observable<any> {
-        return null; // TODO: move from component
+    save(wallet: Wallet): Observable<any> {
+        return this.http.post('/wallet/save', wallet);
     }
 
     removeChange(id: number) {

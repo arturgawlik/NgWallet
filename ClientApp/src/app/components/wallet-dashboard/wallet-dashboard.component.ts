@@ -33,7 +33,7 @@ export class WalletDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.walletService.getAllWallets().subscribe(r => {
+    this.walletService.fetchAll().subscribe(r => {
       this.allWallets = r;
       this.walletId = r[0].id;
       this.fetchData();

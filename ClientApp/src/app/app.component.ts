@@ -29,6 +29,9 @@ export class AppComponent implements OnInit {
             case '/settings/categories-definition':
               this.setupTitle('settings')
               break;
+            case '/settings/wallets-definition':
+              this.setupTitle('settings')
+              break;
             default:
               this.titleService.setTitle('Wallet');
           }

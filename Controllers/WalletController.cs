@@ -45,7 +45,7 @@ namespace wallet.Controllers
         public IActionResult GetAll()
         {
             var _appUser = _db.ApplicationUsers.FirstOrDefault(x => x.FirebaseUserIdentity == _firebaseUserId);
-            var entities = _db.Wallets.Where(x => x.ApplicationUserId == _appUser.Id).Select(x => new WalletDTO { Id = x.Id, Name = x.Name});
+            var entities = _db.Wallets.Where(x => x.ApplicationUserId == _appUser.Id).Select(x => new WalletDTO { Id = x.Id, Name = x.Name, Description = x.Description});
 
             return Json(entities);
         }
