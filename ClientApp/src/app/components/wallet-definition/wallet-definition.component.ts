@@ -8,11 +8,11 @@ import { map, catchError } from 'rxjs/operators';
 import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
 
 @Component({
-  selector: 'app-add-edit-wallet',
-  templateUrl: './add-edit-wallet.component.html',
-  styleUrls: ['./add-edit-wallet.component.css']
+  selector: 'app-wallet-definition',
+  templateUrl: './wallet-definition.component.html',
+  styleUrls: ['./wallet-definition.component.css']
 })
-export class AddEditWalletComponent {
+export class WalletDefinitionComponent {
 
   @Input() wallet: Wallet;
   @Output() walletSaved = new EventEmitter<any>();

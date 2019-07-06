@@ -24,7 +24,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ShellComponent } from './components/shell/shell.component';
 import { HomeComponent } from './components/home/home.component';
 import { WalletsComponent } from './components/wallets/wallets.component';
-import { AddEditWalletComponent } from './components/add-edit-wallet/add-edit-wallet.component';
+import { WalletDefinitionComponent } from './components/wallet-definition/wallet-definition.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { WalletDashboardComponent } from './components/wallet-dashboard/wallet-dashboard.component';
 import { CategoriesDefinitionComponent } from './components/categories-definition/categories-definition.component';
@@ -136,7 +136,7 @@ import { ValidationMessages } from './directives/validation-massages.directive';
     ShellComponent,
     HomeComponent,
     WalletsComponent,
-    AddEditWalletComponent,
+    WalletDefinitionComponent,
     AddIsValidIsInvalidClassDirective,
     AddCardRandomColorDirective,
     SignUpComponent,
