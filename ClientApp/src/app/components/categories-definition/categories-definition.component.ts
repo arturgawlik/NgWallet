@@ -65,6 +65,7 @@ export class CategoriesDefinitionComponent implements OnInit {
           this.messageService.success(null, 'Category is saved successfull!');
           this.initForm(null);
           this.fetchCategories();
+          this.actualAction = "Add new";
         },
         err => {
           this.messageService.error(null, 'Something goes wrong while try to save category.');

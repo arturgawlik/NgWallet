@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using wallet.Models.Database;
 
 namespace wallet.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20190710174139_Add_Default_Category_Wallet")]
+    partial class Add_Default_Category_Wallet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,8 +59,6 @@ namespace wallet.Migrations
 
                     b.Property<int>("ApplicationUserId");
 
-                    b.Property<int?>("CategoryId");
-
                     b.Property<int?>("DefaultCategoryId");
 
                     b.Property<string>("Description");
@@ -70,8 +70,6 @@ namespace wallet.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("CategoryId");
 
                     b.ToTable("Wallets");
                 });
@@ -108,10 +106,6 @@ namespace wallet.Migrations
                         .WithMany("Wallets")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ngWallet.Models.Database.Category")
-                        .WithMany("Wallets")
-                        .HasForeignKey("CategoryId");
                 });
 
             modelBuilder.Entity("wallet.Models.Database.WalletValueChange", b =>

@@ -1,81 +1,79 @@
 <div class="d-flex justify-content-center">
-    <div class="col-12 p-2">
-        <div class="card">
-            <div class="card-header d-flex">
-                Wallets definition
-            </div>
-            <div class="card-body">
-                <div>
-                    <p-table *ngIf="wallets && wallets.length" [value]="wallets" [scrollable]="true"
-                        scrollHeight="250px">
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th colspan="5">Name</th>
-                                <th colspan="4">Description</th>
-                                <th colspan="2">Action</th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-wallet>
-                            <tr>
-                                <td colspan="5">
-                                    {{wallet.name}}
-                                </td>
-                                <td colspan="4">
-                                    {{wallet.description}}
-                                </td>
-                                <td colspan="2">
-                                    <a style="cursor: pointer" class="p-1" (click)="editBtnClick(wallet)"><i
-                                            class="fas fa-edit"></i></a>
-                                    <!-- <a style="cursor: pointer;" class="p-1" (click)="removeBtnClick(wallet.id)"><i
+  <div class="col-12 p-2">
+    <div class="card">
+      <div class="card-header d-flex">
+        Wallets definition
+      </div>
+      <div class="card-body">
+        <div>
+          <p-table *ngIf="wallets && wallets.length" [value]="wallets" [scrollable]="true" scrollHeight="250px">
+            <ng-template pTemplate="header">
+              <tr>
+                <th colspan="3">Name</th>
+                <th colspan="5">Description</th>
+                <th colspan="3">Action</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-wallet>
+              <tr>
+                <td colspan="3">
+                  {{wallet.name}}
+                </td>
+                <td colspan="5">
+                  {{wallet.description}}
+                </td>
+                <td colspan="3">
+                  <a style="cursor: pointer" title="edit" class="p-1" (click)="editBtnClick(wallet)"><i
+                      class="fas fa-edit"></i></a>
+                  <!-- <a style="cursor: pointer;" class="p-1" (click)="removeBtnClick(wallet.id)"><i
                                             class="fas fa-trash-alt"></i></a> -->
-                                </td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
-                </div>
-                <hr>
-                <div>
-                    <h4 class="mb-2">{{actualAction}}</h4>
-                    <form [formGroup]="walletForm" (ngSubmit)="formSubmit()" novalidate>
-                        <div class="form-group row">
-                          <label for="name" class="col-sm-4 col-form-label">Name</label>
-                          <div class="col-sm-8">
-                            <input id="name" class="form-control" type="text" formControlName="Name"
-                              [class.is-valid]="name.valid && (name.touched || name.dirty)"
-                              [class.is-invalid]="name.invalid && (name.touched || name.dirty)">
-                            <div *ngIf="name.valid" class="valid-feedback">
-                              Looks good!
-                            </div>
-                            <div *ngIf="name.errors?.required && (name.touched || name.dirty)" class="invalid-feedback">
-                              Name is required!
-                            </div>
-                            <div *ngIf="name.errors?.nameOccupied && (name.touched || name.dirty)" class="invalid-feedback">
-                              You already have wallet called {{name.value}}
-                            </div>
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label for="description" class="col-sm-4 col-form-label">Description</label>
-                          <div class="col-sm-8">
-                            <input id="description" class="form-control" type="text" formControlName="Description">
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label class="col-sm-4 col-form-label" for="fast-access">Fast access</label>
-                          <div class="col-sm-3">
-                            <input id="fast-access" class="form-control" type="checkbox" formControlName="FastAccess">
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <div class="col-sm-12">
-                            <button type="submit" class="btn btn-info btn-sm btn-block">Save</button>
-                          </div>
-                        </div>
-                      </form>
-                </div>
-            </div>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
         </div>
+        <hr>
+        <div>
+          <h4 class="mb-2">{{actualAction}}</h4>
+          <form [formGroup]="walletForm" (ngSubmit)="formSubmit()" novalidate>
+            <div class="form-group row">
+              <label for="name" class="col-sm-4 col-form-label">Name</label>
+              <div class="col-sm-8">
+                <input id="name" class="form-control" type="text" formControlName="Name" [validationMsg]="name"
+                  [errMsgs]="[{k: 'required', v: 'Name is required!'}, {k: nameOccupied, v: 'You already have wallet called like that'}]">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="description" class="col-sm-4 col-form-label">Description</label>
+              <div class="col-sm-8">
+                <input id="description" class="form-control" type="text" formControlName="Description">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="default-category" class="col-sm-4 col-form-label">Default category</label>
+              <div class="col-sm-8">
+                <select [validationMsg]="defaultCategory" formControlName="DefaultCategoryId"
+                  [errMsgs]="[{k: 'required', v: 'defaultCategory is required!'}]" class="form-control"
+                  title="default-category">
+                  <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="fast-access">Fast access</label>
+              <div class="col-sm-1">
+                <input id="fast-access" class="form-control" type="checkbox" formControlName="FastAccess">
+              </div>
+            </div>
+            <div class="d-flex">
+              <button type="submit" class="btn btn-info ml-auto">Save</button>
+              <button class="btn btn-light ml-2" (click)="reset()">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 

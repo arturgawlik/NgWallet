@@ -8,6 +8,7 @@ namespace ngWallet.DTOs.Response
         public string Name { get; set; }
         public decimal CurrentState { get; set; }
         public string Currency { get; set; }
+        public int? DefaultCategoryId { get; set; }
         public List<WalletChangeResponse> WalletChanges { get; set; }
     }
 }

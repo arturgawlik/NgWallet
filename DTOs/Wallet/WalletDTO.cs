@@ -6,5 +6,6 @@ namespace wallet.DTOs
         public string Name { get; set; }
         public string Description { get; set; }
         public bool FastAccess { get; set; }
+        public int? DefaultCategoryId { get; set; }
     }
 }

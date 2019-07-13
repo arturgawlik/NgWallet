@@ -8,6 +8,8 @@ import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
 import { WalletService } from 'src/app/services/wallet/wallet.service';
 import { Wallet } from 'src/app/services/wallet/models/wallet.model';
 import { MessageService } from 'src/app/services/message/message.service';
+import { Category } from 'src/app/services/category/models/category.model';
+import { CategoryService } from 'src/app/services/category/category.service';
 
 @Component({
   selector: 'app-wallet-definition',
@@ -17,35 +19,41 @@ import { MessageService } from 'src/app/services/message/message.service';
 export class WalletDefinitionComponent {
 
   wallets: Wallet[];
+  categories: Category[]; 
 
   walletForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private httpClient: ApplicationHttpClient, private walletService: WalletService, private messageService: MessageService) {
+  actualAction = 'Add new';
+
+  constructor(private fb: FormBuilder, private httpClient: ApplicationHttpClient, private walletService: WalletService, private messageService: MessageService, private categoryService: CategoryService) {
     this.initForm(null);
     this.fetchWallets();
+    this.fetchCategories();
   }
 
   initForm(wallet: any) {
     if (!wallet) {
       wallet = {};
-      wallet.fastAccess = true;
     }
 
     this.walletForm = this.fb.group({
       Id: [wallet.id],
-      Name: [wallet.name, [Validators.required], [this.walletNameOccupied.bind(this)]],
+      Name: [wallet.name, [Validators.required]/*, [this.walletNameOccupied.bind(this)]*/],
+      DefaultCategoryId: [wallet.defaultCategoryId, [Validators.required]],
       Description: [wallet.description],
       FastAccess: [wallet.fastAccess]
     });
   }
 
   formSubmit() {
+    console.log(this.walletForm.value);
     if (this.walletForm.valid) {
       this.walletService.save((this.walletForm.value as Wallet)).subscribe(
         response => {
           this.initForm(null);
           this.messageService.success(null, 'Wallet is saved successfull!');
           this.fetchWallets();
+          this.actualAction = "Add new";
         },
         err => {
           this.messageService.error(null, 'Something goes wrong while try to save wallet.');
@@ -58,24 +66,46 @@ export class WalletDefinitionComponent {
   }
 
   editBtnClick(wallet: Wallet) {
+    this.initForm(wallet);
+    this.actualAction = "Edit existing";
+  }
 
+  reset() {
+    this.initForm(null);
+    this.actualAction = "Add new";
   }
 
   fetchWallets() {
     this.walletService.fetchAll().subscribe(
       res => {
+        console.log(res);
         this.wallets = res;
       },
       err => {
-
+        console.log(JSON.stringify(err));
       }
     );
+  }
+
+  fetchCategories() {
+    this.categoryService.fetchAll().subscribe(
+      res => {
+        this.categories = res;
+      },
+      err => {
+        console.log(JSON.stringify(err));
+      }
+    )
   }
 
 
 
   get name() {
     return this.walletForm.get('Name');
+  }
+
+  get defaultCategory() {
+    return this.walletForm.get('DefaultCategoryId');
   }
 
 

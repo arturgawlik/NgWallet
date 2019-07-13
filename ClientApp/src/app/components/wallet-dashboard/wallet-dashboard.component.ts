@@ -11,6 +11,7 @@ import { MessageService } from 'src/app/services/message/message.service';
 import { ConfirmationService } from 'primeng/api';
 import { Category } from 'src/app/services/category/models/category.model';
 import { CategoryService } from 'src/app/services/category/category.service';
+import { SubjectService } from 'src/app/services/subject/subject.service';
 
 @Component({
   selector: 'app-wallet-dashboard',
@@ -28,7 +29,14 @@ export class WalletDashboardComponent implements OnInit {
   allWallets: Wallet[];
   categories: Category[];
 
-  constructor(private walletService: WalletService, private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private categoryService: CategoryService) {
+  constructor(private walletService: WalletService, private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private categoryService: CategoryService, private subjectService: SubjectService) {
+    this.subjectService.getMessage().subscribe(
+      v => {
+        if (v) {
+          this.walletId = v;
+        }
+      }
+    )
   }
 
   ngOnInit() {
@@ -54,7 +62,10 @@ export class WalletDashboardComponent implements OnInit {
   }
 
   fetchData() {
-    this.walletService.getWallet(this.walletId).subscribe(x => this.wallet$ = x);
+    this.walletService.getWallet(this.walletId).subscribe(x => {
+      this.wallet$ = x;
+      this.form.get('categoryId').setValue(this.wallet$.defaultCategoryId);
+    });
     this.walletService.getWalletChart(this.walletId).subscribe(x => { console.log(x); this.walletChartResult$ = x; });
     this.initForm();
   }

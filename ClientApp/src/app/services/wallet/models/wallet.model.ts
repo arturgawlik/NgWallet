@@ -5,5 +5,8 @@ export interface Wallet {
     name: string;
     currentState: number;
     currency: string;
+    description: string;
+    defaultCategoryId: number;
     walletChanges: WalletChange[];
+    fastAccess: boolean;
 }

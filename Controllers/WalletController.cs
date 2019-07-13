@@ -14,11 +14,9 @@ namespace wallet.Controllers
     public class WalletController : BaseController
     {
         DatabaseContext _db;
-        // ApplicationUser _appUser;
         public WalletController(DatabaseContext db)
     {
             _db = db;
-            // _appUser = _db.ApplicationUsers.FirstOrDefault(x => x.FirebaseUserIdentity == _firebaseUserId);
         }
 
         [HttpPost]
@@ -29,7 +27,10 @@ namespace wallet.Controllers
 
             var entity = new Wallet();
             BuildEntity(entity, dto);
-            await _db.Wallets.AddAsync(entity);
+            if (entity.Id > 0)
+                _db.Wallets.Update(entity);
+            else
+                await _db.Wallets.AddAsync(entity);
             await _db.SaveChangesAsync();
             return Ok();
         }
@@ -45,7 +46,7 @@ namespace wallet.Controllers
         public IActionResult GetAll()
         {
             var _appUser = _db.ApplicationUsers.FirstOrDefault(x => x.FirebaseUserIdentity == _firebaseUserId);
-            var entities = _db.Wallets.Where(x => x.ApplicationUserId == _appUser.Id).Select(x => new WalletDTO { Id = x.Id, Name = x.Name, Description = x.Description});
+            var entities = _db.Wallets.Where(x => x.ApplicationUserId == _appUser.Id).Select(x => new WalletDTO { Id = x.Id, Name = x.Name, Description = x.Description, FastAccess = x.FastAccess, DefaultCategoryId = x.DefaultCategoryId});
 
             return Json(entities);
         }
@@ -71,6 +72,7 @@ namespace wallet.Controllers
             responseWallet.Currency = "PLN"; // TODO
             responseWallet.CurrentState = changes.Sum(x => x.ChangeValue);
             responseWallet.WalletChanges = responseChanges;
+            responseWallet.DefaultCategoryId = wallet.DefaultCategoryId;
 
             return Json(responseWallet);
         }
@@ -110,6 +112,7 @@ namespace wallet.Controllers
             entity.Name = dto.Name;
             entity.Description = dto.Description;
             entity.FastAccess = dto.FastAccess;
+            entity.DefaultCategoryId = dto.DefaultCategoryId;
         }
     }
 }

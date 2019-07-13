@@ -10,5 +10,6 @@ namespace ngWallet.Models.Database
         public string Name { get; set; }
         public string Color { get; set; }
         public ICollection<WalletValueChange> WalletValueChanges { get; set; }
+        public ICollection<Wallet> Wallets { get; set; }
     }
 }

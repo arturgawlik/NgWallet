@@ -53,6 +53,7 @@ import { WalletService } from './services/wallet/wallet.service';
 import { ApplicationHttpClient } from './services/http/applicationHttpClientService.service';
 import { MessageService } from './services/message/message.service';
 import { CategoryService } from './services/category/category.service';
+import { SubjectService } from './services/subject/subject.service';
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------         
@@ -163,7 +164,7 @@ import { ValidationMessages } from './directives/validation-massages.directive';
     TableModule,
     ColorPickerModule
   ],
-  providers: [AuthService, AuthGuard, LoginGuard, ApplicationHttpClient, WalletService, MessageService, ConfirmationService, CategoryService],
+  providers: [AuthService, AuthGuard, LoginGuard, ApplicationHttpClient, WalletService, MessageService, ConfirmationService, CategoryService, SubjectService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
