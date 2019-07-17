@@ -14,3 +14,11 @@
 .no-padding-bottom {
     padding-bottom: 0 !important;
 }
+
+.elem-w {
+    min-width: 800px;
+}
+
+.overflow-xs {
+    overflow-x: scroll;
+}

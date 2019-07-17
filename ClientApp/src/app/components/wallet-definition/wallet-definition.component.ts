@@ -62,6 +62,7 @@ export class WalletDefinitionComponent {
       )
     } else {
       this.name.markAsTouched();
+      this.defaultCategory.markAllAsTouched();
     }
   }
 

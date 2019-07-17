@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('loginPassword');
   }
 
-  constructor(private renderer: Renderer2, private authService: AuthService, private fb: FormBuilder) {
+  constructor(private renderer: Renderer2, private authService: AuthService, private fb: FormBuilder, private httpClient: ApplicationHttpClient) {
     this.buildLoginForm();
   }
 
@@ -76,11 +76,14 @@ export class LoginComponent implements OnInit {
   loginWithEmailAndPassword() {
     if (this.loginForm.valid) {
       this.authService.doLogin(this.loginEmail.value, this.loginPassword.value)
-      .catch(err => {
-        console.error(err);
-        this.setAllLoggingFlagsAsFalse();
-        this.loggingWithEmailAndPassError = true;
-      });
+        .then(() => { // TODO
+          this.httpClient.post('applicationUser/addApplicationUserIfNotExists', null).subscribe(res => console.log(res))
+        })
+        .catch(err => {
+          console.error(err);
+          this.setAllLoggingFlagsAsFalse();
+          this.loggingWithEmailAndPassError = true;
+        });
       this.setAllLoggingFlagsAsFalse();
       this.loggingWithEmailAndPass = true;
     } else {
@@ -91,6 +94,9 @@ export class LoginComponent implements OnInit {
 
   loginWithGoogle() {
     this.authService.doLoginWithGoogle()
+      .then(() => { // TODO
+        this.httpClient.post('applicationUser/addApplicationUserIfNotExists', null).subscribe(res => console.log(res))
+      })
       .catch(err => {
         console.error(err);
         this.setAllLoggingFlagsAsFalse();
@@ -101,6 +107,9 @@ export class LoginComponent implements OnInit {
 
   loginWithFacebook() {
     this.authService.doFacebookLogin()
+      .then(() => { // TODO
+        this.httpClient.post('applicationUser/addApplicationUserIfNotExists', null).subscribe(res => console.log(res))
+      })
       .catch(err => {
         console.error(err);
         this.setAllLoggingFlagsAsFalse();

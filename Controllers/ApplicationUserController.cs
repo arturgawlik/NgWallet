@@ -8,7 +8,6 @@ using wallet.Models.Database;
 
 namespace wallet.Controllers
 {
-    [Route("api/[controller]")]
     public class ApplicationUserController : BaseController
     {
         DatabaseContext _db;
@@ -17,7 +16,7 @@ namespace wallet.Controllers
             _db = db;
         }
 
-        [HttpPost("[action]")]
+        [HttpPost]
         public async Task<IActionResult> AddApplicationUserIfNotExists()
         {
             var entity = _db.ApplicationUsers.FirstOrDefault(x => x.FirebaseUserIdentity == _firebaseUserId);
