@@ -52,7 +52,7 @@
             <div class="form-group row">
               <label for="default-category" class="col-sm-4 col-form-label">Default category</label>
               <div class="col-sm-8">
-                <select  [validationMsg]="defaultCategory" formControlName="DefaultCategoryId"
+                <select addDefaultIfNotSelected [validationMsg]="defaultCategory" formControlName="DefaultCategoryId"
                   [errMsgs]="[{k: 'required', v: 'Default category is required!'}]" class="form-control"
                   title="default-category">
                   <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>

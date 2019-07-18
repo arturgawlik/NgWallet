@@ -10,7 +10,7 @@
 
       <a href="javascript:void(0)" class="list-group-item list-group-item-action d-flex"
         style="cursor:auto;background-color: #f8f9fa !important">Fast Wallets <i (click)="toggleFastWallets()"
-          style="padding-top:5px;cursor: pointer;" class="fas fa-ellipsis-v ml-auto"></i></a>
+          style="padding-top:5px;cursor: pointer;" class="fas fa-ellipsis-v ml-auto padd"></i></a>
 
       <div [@popOverFastWallets]="fastWalletsStateName">
         <a *ngFor="let fastWallet of fastWallets" href="javascript:void(0)" [routerLink]="'/home'"
@@ -21,7 +21,7 @@
 
       <a href="javascript:void(0)" class="list-group-item list-group-item-action d-flex"
         style="cursor:auto;background-color: #f8f9fa !important">Settings <i (click)="toggle()"
-          style="padding-top:5px;cursor: pointer;" class="fas fa-ellipsis-v ml-auto"></i></a>
+          style="padding-top:5px;cursor: pointer;" class="fas fa-ellipsis-v ml-auto padd"></i></a>
 
       <div [@popOverState]="stateName">
         <a href="javascript:void(0)" [routerLink]="'/settings/wallets-definition'" (click)="sideBarVisible=false;"

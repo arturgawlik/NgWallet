@@ -90,4 +90,9 @@ body {
   .fade.in {
     opacity: 1;
   }
+
+  .padd {
+    padding-left: 50px;
+    padding-right: 10px;
+  }
   
