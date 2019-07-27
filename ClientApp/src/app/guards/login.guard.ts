@@ -5,7 +5,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class LoginGuard implements CanActivate {
 
   constructor(private router: Router, private afAuth: AngularFireAuth) {

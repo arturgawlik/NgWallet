@@ -6,7 +6,9 @@ import { WalletChartResult } from "./models/walletChartResult.model";
 import { WalletChangeSave } from "./models/walletChangeSave.model";
 import { map } from "rxjs/operators";
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class WalletService {
 
     constructor(private http: ApplicationHttpClient) {

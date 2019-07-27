@@ -20,14 +20,14 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 // --------------------------------------app components-------------------------------------------------    
 // -----------------------------------------------------------------------------------------------------  
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
+// import { LoginComponent } from './components/login/login.component';
 import { ShellComponent } from './components/shell/shell.component';
 import { HomeComponent } from './components/home/home.component';
-import { WalletDefinitionComponent } from './components/wallet-definition/wallet-definition.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
+// import { WalletDefinitionComponent } from './components/wallet-definition/wallet-definition.component';
+// import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { WalletDashboardComponent } from './components/wallet-dashboard/wallet-dashboard.component';
 import { CategoriesDefinitionComponent } from './components/categories-definition/categories-definition.component';
-import { ColorComponent } from './components/color/color.component';
+// import { ColorComponent } from './components/color/color.component';
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------         
@@ -48,12 +48,12 @@ import { RoutingModule } from './routing/routing.module';
 // -----------------------------------------------------------------------------------------------------  
 // --------------------------------------app services---------------------------------------------------    
 // -----------------------------------------------------------------------------------------------------  
-import { AuthService } from './services/auth/auth.service';
-import { WalletService } from './services/wallet/wallet.service';
-import { ApplicationHttpClient } from './services/http/applicationHttpClientService.service';
-import { MessageService } from './services/message/message.service';
-import { CategoryService } from './services/category/category.service';
-import { SubjectService } from './services/subject/subject.service';
+// import { AuthService } from './services/auth/auth.service';
+// import { WalletService } from './services/wallet/wallet.service';
+// import { ApplicationHttpClient } from './services/http/applicationHttpClientService.service';
+// import { MessageService } from './services/message/message.service';
+// import { CategoryService } from './services/category/category.service';
+// import { SubjectService } from './services/subject/subject.service';
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------         
@@ -64,7 +64,7 @@ import { SubjectService } from './services/subject/subject.service';
 // -----------------------------------------------------------------------------------------------------  
 // --------------------------------------app pipes------------------------------------------------------    
 // -----------------------------------------------------------------------------------------------------  
-import { AbsolutePipe } from './pipes/absolute.pipe';
+// import { AbsolutePipe } from './pipes/absolute.pipe';
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------  
@@ -75,8 +75,8 @@ import { AbsolutePipe } from './pipes/absolute.pipe';
 // -----------------------------------------------------------------------------------------------------  
 // --------------------------------------app guards-----------------------------------------------------    
 // -----------------------------------------------------------------------------------------------------  
-import { AuthGuard } from './guards/auth.guard';
-import { LoginGuard } from './guards/login.guard';
+// import { AuthGuard } from './guards/auth.guard';
+// import { LoginGuard } from './guards/login.guard';
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------  
@@ -87,10 +87,11 @@ import { LoginGuard } from './guards/login.guard';
 // -----------------------------------------------------------------------------------------------------  
 // --------------------------------------app directives-------------------------------------------------    
 // -----------------------------------------------------------------------------------------------------  
-import { AddIsValidIsInvalidClassDirective } from './directives/add-is-valid-is-invalid-class.directive';
-import { AddCardRandomColorDirective } from './directives/add-card-random-color.directive';
-import { GradientDirective } from './directives/gradient.directive';
-import { AddDefaultNotSelected } from './directives/add-default-not-selected.directive';
+// import { AddIsValidIsInvalidClassDirective } from './directives/add-is-valid-is-invalid-class.directive';
+// import { AddCardRandomColorDirective } from './directives/add-card-random-color.directive';
+// import { GradientDirective } from './directives/gradient.directive';
+// import { AddDefaultNotSelected } from './directives/add-default-not-selected.directive';
+// import { ValidationMessages } from './directives/validation-massages.directive';
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------  
@@ -107,9 +108,9 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 
 import { ChartModule } from 'primeng/chart';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
+// import { ConfirmationService } from 'primeng/api';
 import { TableModule } from 'primeng/table';
-import { ColorPickerModule } from 'primeng/colorpicker';
+// import { ColorPickerModule } from 'primeng/colorpicker';
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------  
@@ -121,7 +122,8 @@ import { ColorPickerModule } from 'primeng/colorpicker';
 // --------------------------------------settings-------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------      
 import { environment } from '../environments/environment';
-import { ValidationMessages } from './directives/validation-massages.directive';
+import { ServiceModule } from './service.module';
+import { SharedModule } from './directives/directives.module';
 // -----------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------  
@@ -133,20 +135,20 @@ import { ValidationMessages } from './directives/validation-massages.directive';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
+    // LoginComponent,
     ShellComponent,
-    HomeComponent,
-    WalletDefinitionComponent,
-    AddIsValidIsInvalidClassDirective,
-    AddCardRandomColorDirective,
-    SignUpComponent,
-    WalletDashboardComponent,
-    AbsolutePipe,
-    CategoriesDefinitionComponent,
-    ValidationMessages,
-    ColorComponent,
-    GradientDirective,
-    AddDefaultNotSelected
+    // HomeComponent,
+    // WalletDefinitionComponent,
+    // AddIsValidIsInvalidClassDirective,
+    // AddCardRandomColorDirective,
+    // SignUpComponent,
+    // WalletDashboardComponent,
+    // AbsolutePipe,
+    // CategoriesDefinitionComponent,
+    // ValidationMessages,
+    // ColorComponent,
+    // GradientDirective,
+    // AddDefaultNotSelected
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -164,9 +166,11 @@ import { ValidationMessages } from './directives/validation-massages.directive';
     ToastrModule.forRoot(),
     ConfirmDialogModule,
     TableModule,
-    ColorPickerModule
+    // ColorPickerModule,
+    ServiceModule,
+    SharedModule
   ],
-  providers: [AuthService, AuthGuard, LoginGuard, ApplicationHttpClient, WalletService, MessageService, ConfirmationService, CategoryService, SubjectService],
+  
   bootstrap: [AppComponent],
 })
 export class AppModule { }

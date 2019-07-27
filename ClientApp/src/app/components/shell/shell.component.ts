@@ -6,7 +6,7 @@ import { state, style, transition, trigger, animate } from '@angular/animations'
 import { Wallet } from 'src/app/models/wallet';
 import { WalletService } from 'src/app/services/wallet/wallet.service';
 import { SubjectService } from 'src/app/services/subject/subject.service';
-import { Router } from '@angular/router';
+import { Router, RouterEvent, NavigationStart, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-shell',
@@ -43,10 +43,19 @@ export class ShellComponent implements OnInit {
   sideBarVisible = false;
   firstSubMenuVisable = false;
   fastWalletsSubMenuVisable = false;
+  loading = true;
 
   fastWallets: Wallet[];
 
   constructor(private renderer: Renderer2, private authService: AuthService, @Inject(DOCUMENT) private document: any, private walletService: WalletService, private subjectService: SubjectService, private router: Router) {
+    router.events.subscribe((e: RouterEvent) => {
+      if (event instanceof NavigationStart) {
+        this.loading = true;
+      } else if (event instanceof NavigationEnd) {
+        // this.loading = false;
+      }
+    });
+    
     this.walletService.fetchAll().subscribe(r => {
       this.fastWallets = r.filter(w => w.fastAccess);
     });

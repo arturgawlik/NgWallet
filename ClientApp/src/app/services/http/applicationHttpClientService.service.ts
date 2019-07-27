@@ -5,7 +5,9 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { AngularFireAuth } from "@angular/fire/auth";
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class ApplicationHttpClient {
 
     constructor(private afAuth: AngularFireAuth, private httpClient: HttpClient) {

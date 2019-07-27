@@ -13,12 +13,23 @@ const routes: Routes = [
     path: '', component: ShellComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent },
-      { path: 'settings/categories-definition', component: CategoriesDefinitionComponent },
-      { path: 'settings/wallets-definition', component: WalletDefinitionComponent }
+      { 
+        path: 'home', 
+        loadChildren: () => import('../components/home/home.module').then(mod => mod.HomeModule) 
+      },
+      { 
+        path: 'settings/categories-definition', 
+        loadChildren: () => import('../components/categories-definition/categories-definition.module').then(mod => mod.CategoriesDefinitionModule) 
+      },
+      { 
+        path: 'settings/wallets-definition', 
+        loadChildren: () => import('../components/wallet-definition/wallet-definition.module').then(mod => mod.WalletDefinitionModule) 
+      }
     ], canActivate: [AuthGuard]
   },
-  { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
+  { path: 'login', 
+    loadChildren: () => import('../components/login/login.module').then(mod => mod.LoginModule)
+  , canActivate: [LoginGuard] },
 ];
 
 @NgModule({
