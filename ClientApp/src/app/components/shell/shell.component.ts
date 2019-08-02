@@ -43,19 +43,10 @@ export class ShellComponent implements OnInit {
   sideBarVisible = false;
   firstSubMenuVisable = false;
   fastWalletsSubMenuVisable = false;
-  loading = true;
 
   fastWallets: Wallet[];
 
   constructor(private renderer: Renderer2, private authService: AuthService, @Inject(DOCUMENT) private document: any, private walletService: WalletService, private subjectService: SubjectService, private router: Router) {
-    router.events.subscribe((e: RouterEvent) => {
-      if (event instanceof NavigationStart) {
-        this.loading = true;
-      } else if (event instanceof NavigationEnd) {
-        // this.loading = false;
-      }
-    });
-    
     this.walletService.fetchAll().subscribe(r => {
       this.fastWallets = r.filter(w => w.fastAccess);
     });
@@ -64,6 +55,7 @@ export class ShellComponent implements OnInit {
   ngOnInit() {
     // this.renderer.removeStyle(document.body, 'backgroundImage');
     (this.document.body as HTMLElement).style.backgroundImage = null;
+
   }
 
   logout() {

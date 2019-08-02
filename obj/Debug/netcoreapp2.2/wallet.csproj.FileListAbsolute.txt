@@ -13,11 +13,14 @@
 /Users/arturgawlik/Documents/ProgramowanieDotNet/walletAngular/wallet/ngWallet/obj/Debug/netcoreapp2.2/wallet.AssemblyInfo.cs
 /Users/arturgawlik/Documents/ProgramowanieDotNet/walletAngular/wallet/ngWallet/obj/Debug/netcoreapp2.2/wallet.TagHelpers.input.cache
 /Users/arturgawlik/Documents/ProgramowanieDotNet/walletAngular/wallet/ngWallet/obj/Debug/netcoreapp2.2/wallet.RazorCoreGenerate.cache
-/Users/arturgawlik/Documents/ProgramowanieDotNet/walletAngular/wallet/ngWallet/obj/Debug/netcoreapp2.2/Razor/Pages/Error.g.cshtml.cs
-/Users/arturgawlik/Documents/ProgramowanieDotNet/walletAngular/wallet/ngWallet/obj/Debug/netcoreapp2.2/Razor/Pages/_ViewImports.g.cshtml.cs
 /Users/arturgawlik/Documents/ProgramowanieDotNet/walletAngular/wallet/ngWallet/obj/Debug/netcoreapp2.2/wallet.RazorTargetAssemblyInfo.cache
 /Users/arturgawlik/Documents/ProgramowanieDotNet/walletAngular/wallet/ngWallet/obj/Debug/netcoreapp2.2/wallet.RazorTargetAssemblyInfo.cs
 /Users/arturgawlik/Documents/ProgramowanieDotNet/walletAngular/wallet/ngWallet/obj/Debug/netcoreapp2.2/wallet.Views.pdb
 /Users/arturgawlik/Documents/ProgramowanieDotNet/walletAngular/wallet/ngWallet/obj/Debug/netcoreapp2.2/wallet.dll
 /Users/arturgawlik/Documents/ProgramowanieDotNet/walletAngular/wallet/ngWallet/obj/Debug/netcoreapp2.2/wallet.pdb
 /Users/arturgawlik/Documents/ProgramowanieDotNet/walletAngular/wallet/ngWallet/obj/Debug/netcoreapp2.2/wallet.csproj.CopyComplete
+/Users/arturgawlik/Documents/ProgramowanieDotNet/walletAngular/wallet/ngWallet/bin/Debug/netcoreapp2.2/appsettings.Development.json
+/Users/arturgawlik/Documents/ProgramowanieDotNet/walletAngular/wallet/ngWallet/bin/Debug/netcoreapp2.2/appsettings.json
+/Users/arturgawlik/Documents/ProgramowanieDotNet/walletAngular/wallet/ngWallet/bin/Debug/netcoreapp2.2/Properties/launchSettings.json
+/Users/arturgawlik/Documents/ProgramowanieDotNet/walletAngular/wallet/ngWallet/obj/Debug/netcoreapp2.2/Razor/Pages/Error.cshtml.g.cs
+/Users/arturgawlik/Documents/ProgramowanieDotNet/walletAngular/wallet/ngWallet/obj/Debug/netcoreapp2.2/Razor/Pages/_ViewImports.cshtml.g.cs

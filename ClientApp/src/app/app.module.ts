@@ -111,6 +111,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 // import { ConfirmationService } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 // import { ColorPickerModule } from 'primeng/colorpicker';
+import { NgProgressModule } from '@ngx-progressbar/core';
 // -----------------------------------------------------------------------------------------------------  
 // -----------------------------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------------  
@@ -168,7 +169,8 @@ import { SharedModule } from './directives/directives.module';
     TableModule,
     // ColorPickerModule,
     ServiceModule,
-    SharedModule
+    SharedModule,
+    NgProgressModule
   ],
   
   bootstrap: [AppComponent],

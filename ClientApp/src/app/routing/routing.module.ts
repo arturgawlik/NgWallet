@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { ShellComponent } from '../components/shell/shell.component';
 import { LoginComponent } from '../components/login/login.component';
 import { AuthGuard } from '../guards/auth.guard';
@@ -25,7 +25,7 @@ const routes: Routes = [
         path: 'settings/wallets-definition', 
         loadChildren: () => import('../components/wallet-definition/wallet-definition.module').then(mod => mod.WalletDefinitionModule) 
       }
-    ], canActivate: [AuthGuard]
+    ], canActivate: [AuthGuard],
   },
   { path: 'login', 
     loadChildren: () => import('../components/login/login.module').then(mod => mod.LoginModule)
@@ -34,6 +34,8 @@ const routes: Routes = [
 
 @NgModule({
   exports: [RouterModule],
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: PreloadAllModules
+  })],
 })
 export class RoutingModule { }
