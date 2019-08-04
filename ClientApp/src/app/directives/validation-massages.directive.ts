@@ -1,14 +1,14 @@
-import { Directive, ElementRef, Input, OnChanges, Renderer2, OnInit, DoCheck } from "@angular/core";
-import { AbstractControl } from "@angular/forms";
-import { Pair } from "../helpers/keyValuePair";
+import { Directive, ElementRef, Input, OnChanges, Renderer2, OnInit, DoCheck } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
+import { Pair } from '../helpers/keyValuePair';
 
 @Directive({
-    selector: '[validationMsg]',
+    selector: '[appValidationMsg]',
 })
-export class ValidationMessages implements OnInit, DoCheck {
+export class ValidationMessagesDirective implements OnInit, DoCheck {
 
-    @Input('validationMsg') fc: AbstractControl;
-    @Input('errMsgs') validatorsWithErrMessage: Pair<string, string>[];
+    @Input('appValidationMsg') fc: AbstractControl;
+    @Input() errMsgs: Pair<string, string>[];
 
     constructor(private elementRef: ElementRef<HTMLElement>, private renderer: Renderer2) {
     }
@@ -22,17 +22,18 @@ export class ValidationMessages implements OnInit, DoCheck {
     }
 
     private check() {
-        if (this.fc == null)
+        if (this.fc == null) {
             return;
+        }
 
         this.reset();
 
         if (this.fc.invalid && (this.fc.touched || this.fc.dirty)) {
             this.elementRef.nativeElement.classList.add('is-invalid');
 
-            if (this.validatorsWithErrMessage) {
-                this.validatorsWithErrMessage.forEach(e => {
-                    if (this.fc.errors[e.k]) {
+            if (this.errMsgs) {
+                this.errMsgs.forEach(e => {
+                    if (this.fc.errors && this.fc.errors[e.k]) {
                         const elem = this.createErrElem(e.v);
                         this.elementRef.nativeElement.after(elem);
                     }

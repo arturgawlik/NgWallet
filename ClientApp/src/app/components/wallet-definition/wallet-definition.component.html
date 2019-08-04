@@ -39,7 +39,7 @@
             <div class="form-group row">
               <label for="name" class="col-sm-4 col-form-label">Name</label>
               <div class="col-sm-8">
-                <input id="name" class="form-control" type="text" formControlName="Name" [validationMsg]="name"
+                <input id="name" class="form-control" type="text" formControlName="Name" [appValidationMsg]="name"
                   [errMsgs]="[{k: 'required', v: 'Name is required!'}, {k: 'nameOccupied', v: 'You already have wallet called like that'}]">
               </div>
             </div>
@@ -52,7 +52,7 @@
             <div class="form-group row">
               <label for="default-category" class="col-sm-4 col-form-label">Default category</label>
               <div class="col-sm-8">
-                <select addDefaultIfNotSelected [validationMsg]="defaultCategory" formControlName="DefaultCategoryId"
+                <select addDefaultIfNotSelected [appValidationMsg]="defaultCategory" formControlName="DefaultCategoryId"
                   [errMsgs]="[{k: 'required', v: 'Default category is required!'}]" class="form-control"
                   title="default-category">
                   <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>

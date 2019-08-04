@@ -1,11 +1,11 @@
-import { Directive, Input, ElementRef, OnInit, OnChanges } from "@angular/core";
+import { Directive, Input, ElementRef, OnInit, OnChanges } from '@angular/core';
 
 @Directive({
-    selector: '[gradient]'
+    selector: '[appGradient]'
 })
 export class GradientDirective implements OnInit, OnChanges {
 
-    @Input('gradient') color: string;
+    @Input('appGradient') color: string;
 
     constructor(private elementRef: ElementRef<HTMLElement>) {
     }

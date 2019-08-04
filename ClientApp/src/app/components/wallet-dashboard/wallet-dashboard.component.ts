@@ -22,21 +22,27 @@ export class WalletDashboardComponent implements OnInit {
 
   walletId: number;
 
-  private wallet$: Wallet
+  private wallet$: Wallet;
   private walletChartResult$: WalletChartResult;
   form: FormGroup;
   isChangeSaving = false;
   allWallets: Wallet[];
   categories: Category[];
 
-  constructor(private walletService: WalletService, private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private categoryService: CategoryService, private subjectService: SubjectService) {
+  constructor(private walletService: WalletService,
+    private fb: FormBuilder,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
+    private categoryService: CategoryService,
+    private subjectService: SubjectService
+  ) {
     this.subjectService.getMessage().subscribe(
       v => {
         if (v) {
           this.walletId = v;
         }
       }
-    )
+    );
   }
 
   ngOnInit() {
@@ -86,7 +92,7 @@ export class WalletDashboardComponent implements OnInit {
           console.log(JSON.stringify(err));
           this.isChangeSaving = false;
         }
-      )
+      );
     } else {
       this.formValue.markAsDirty();
       this.formCategory.markAsDirty();
@@ -105,7 +111,7 @@ export class WalletDashboardComponent implements OnInit {
           err => {
             this.messageService.error(null, 'Something goes wrong while try to remove change.');
           }
-        )
+        );
       },
       reject: () => {
         console.log('do not remove ' + id);
@@ -115,65 +121,54 @@ export class WalletDashboardComponent implements OnInit {
 
   //#region template getters
   get walletName$(): string {
-    // return this.wallet$.pipe(
-    //   map(w => w.name)
-    // );
-    if (this.wallet$)
+    if (this.wallet$) {
       return this.wallet$.name;
-    else return null;
+    } else {
+      return null;
+    }
   }
 
   get walletCurrentState$(): number {
-    // return this.wallet$.pipe(
-    //   map(w => w.currentState)
-    // );
-    if (this.wallet$)
+    if (this.wallet$) {
       return this.wallet$.currentState;
-    else
+    } else {
       return null;
+    }
   }
 
   get walletCurrency$(): string {
-    // return this.wallet$.pipe(
-    //   map(w => w.currency)
-    // );
-    if (this.wallet$)
+    if (this.wallet$) {
       return this.wallet$.currency;
-    else
+    } else {
       return null;
+    }
   }
 
   get walletChanges$(): WalletChange[] {
-    // return this.wallet$.pipe(
-    //   map(w => w.walletChanges)
-    // );
-    if (this.wallet$)
+    if (this.wallet$) {
       return this.wallet$.walletChanges;
-    else
+    } else {
       return null;
+    }
   }
 
   get walletChartData$(): Observable<any> {
-    // return this.walletChartResult$.pipe(
-    //   map(r => r.data)
-    // );
-    if (this.walletChartResult$)
+    if (this.walletChartResult$) {
       return this.walletChartResult$.data;
-    else
+    } else {
       return null;
+    }
   }
 
   get walletChartOptions$(): Observable<any> {
-    // return this.walletChartResult$.pipe(
-    //   map(r => r.options)
-    // );
-    if (this.walletChartResult$)
+    if (this.walletChartResult$) {
       return this.walletChartResult$.options;
-    else
+    } else {
       return null;
+    }
   }
 
-  //form getters
+  // form getters
   get formValue(): AbstractControl {
     return this.form.get('value');
   }

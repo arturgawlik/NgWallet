@@ -19,13 +19,19 @@ import { CategoryService } from 'src/app/services/category/category.service';
 export class WalletDefinitionComponent {
 
   wallets: Wallet[];
-  categories: Category[]; 
+  categories: Category[];
 
   walletForm: FormGroup;
 
   actualAction = 'Add new';
 
-  constructor(private fb: FormBuilder, private httpClient: ApplicationHttpClient, private walletService: WalletService, private messageService: MessageService, private categoryService: CategoryService) {
+  constructor(
+    private fb: FormBuilder,
+    private httpClient: ApplicationHttpClient,
+    private walletService: WalletService,
+    private messageService: MessageService,
+    private categoryService: CategoryService
+  ) {
     this.initForm(null);
     this.fetchWallets();
     this.fetchCategories();
@@ -53,13 +59,13 @@ export class WalletDefinitionComponent {
           this.initForm(null);
           this.messageService.success(null, 'Wallet is saved successfull!');
           this.fetchWallets();
-          this.actualAction = "Add new";
+          this.actualAction = 'Add new';
         },
         err => {
           this.messageService.error(null, 'Something goes wrong while try to save wallet.');
           console.log(JSON.stringify(err));
         }
-      )
+      );
     } else {
       this.name.markAsTouched();
       this.defaultCategory.markAllAsTouched();
@@ -68,12 +74,12 @@ export class WalletDefinitionComponent {
 
   editBtnClick(wallet: Wallet) {
     this.initForm(wallet);
-    this.actualAction = "Edit existing";
+    this.actualAction = 'Edit existing';
   }
 
   reset() {
     this.initForm(null);
-    this.actualAction = "Add new";
+    this.actualAction = 'Add new';
   }
 
   fetchWallets() {
@@ -96,7 +102,7 @@ export class WalletDefinitionComponent {
       err => {
         console.log(JSON.stringify(err));
       }
-    )
+    );
   }
 
 

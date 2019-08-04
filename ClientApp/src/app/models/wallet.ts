@@ -4,6 +4,6 @@ export class Wallet {
         public name?: string,
         public description?: string,
         public fastAccess?: boolean
-    ){
+    ) {
     }
 }

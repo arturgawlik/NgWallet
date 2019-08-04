@@ -1,9 +1,9 @@
-import { Directive, ElementRef, OnInit, Renderer2, DoCheck, AfterViewChecked } from "@angular/core";
+import { Directive, ElementRef, OnInit, Renderer2, DoCheck, AfterViewChecked } from '@angular/core';
 
 @Directive({
-    selector: '[addDefaultIfNotSelected]'
+    selector: '[appAddDefaultIfNotSelected]'
 })
-export class AddDefaultNotSelected implements DoCheck {
+export class AddDefaultNotSelectedDirective implements DoCheck {
 
     constructor(private elem: ElementRef<HTMLSelectElement>, private renderer: Renderer2) {
     }
@@ -13,7 +13,11 @@ export class AddDefaultNotSelected implements DoCheck {
     }
 
     private check() {
-        if (this.elem.nativeElement.selectedOptions.length && this.elem.nativeElement.selectedOptions.item(0).text !== 'Choose option' && this.elem.nativeElement.options.item(0).text === 'Choose option') {
+        if (
+                this.elem.nativeElement.selectedOptions.length
+                && this.elem.nativeElement.selectedOptions.item(0).text !== 'Choose option'
+                && this.elem.nativeElement.options.item(0).text === 'Choose option'
+            ) {
             this.elem.nativeElement.options.remove(0);
         } else {
             const temp = this.elem.nativeElement.options.item(0);
@@ -35,7 +39,10 @@ export class AddDefaultNotSelected implements DoCheck {
             option.value = 'null';
             option.selected = true;
             this.elem.nativeElement.options.add(option, 0);
-        } else if (!this.elem.nativeElement.selectedOptions.namedItem('default-choose-option') && this.elem.nativeElement.options.namedItem('default-choose-option')) {
+        } else if (
+                !this.elem.nativeElement.selectedOptions.namedItem('default-choose-option')
+                && this.elem.nativeElement.options.namedItem('default-choose-option')
+            ) {
             const tmp = this.elem.nativeElement.options.namedItem('default-choose-option');
             tmp.remove();
         }

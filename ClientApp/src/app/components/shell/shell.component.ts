@@ -46,7 +46,13 @@ export class ShellComponent implements OnInit {
 
   fastWallets: Wallet[];
 
-  constructor(private renderer: Renderer2, private authService: AuthService, @Inject(DOCUMENT) private document: any, private walletService: WalletService, private subjectService: SubjectService, private router: Router) {
+  constructor(private renderer: Renderer2,
+    private authService: AuthService,
+    @Inject(DOCUMENT) private document: any,
+    private walletService: WalletService,
+    private subjectService: SubjectService,
+    private router: Router
+  ) {
     this.walletService.fetchAll().subscribe(r => {
       this.fastWallets = r.filter(w => w.fastAccess);
     });

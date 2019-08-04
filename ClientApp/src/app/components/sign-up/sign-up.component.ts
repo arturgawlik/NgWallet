@@ -12,7 +12,7 @@ export class SignUpComponent implements OnInit {
 
   signUpForm: FormGroup;
 
-  @Output('goBack') goBackEvent = new EventEmitter<any>();
+  @Output() goBack = new EventEmitter<any>();
   @Output() registerError = new EventEmitter<any>();
   @Output() registerStart = new EventEmitter<any>();
 
@@ -64,8 +64,8 @@ export class SignUpComponent implements OnInit {
     }
   }
 
-  goBack() {
-    this.goBackEvent.emit();
+  doGoBack() {
+    this.goBack.emit();
   }
 
 }

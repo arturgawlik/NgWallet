@@ -5,14 +5,12 @@ import { AbstractControl } from '@angular/forms';
   selector: '[appAddIsValidIsInvalidClass]'
 })
 export class AddIsValidIsInvalidClassDirective {
-  
+
   _shouldMarkAsInvalid?: boolean = null;
-  @Input('appAddIsValidIsInvalidClass') 
+  @Input('appAddIsValidIsInvalidClass')
   set abstractControl(value: boolean) {
     this._shouldMarkAsInvalid = value;
     this.checkState();
-    console.log('shouldMarkAsValid');
-    
   }
 
   constructor(private renderer: Renderer2, private hostElem: ElementRef, private applicationRef: ApplicationRef) {

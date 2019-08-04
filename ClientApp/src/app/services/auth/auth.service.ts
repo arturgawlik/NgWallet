@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { auth } from 'firebase/app';
-import { AngularFireAuth } from "@angular/fire/auth";
+import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from 'firebase';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class AuthService {
 
   doFacebookLogin() {
     return new Promise<any>((resolve, reject) => {
-      let provider = new auth.FacebookAuthProvider();
+      const provider = new auth.FacebookAuthProvider();
       this.afAuth.auth
         .signInWithPopup(provider)
         .then(res => {
@@ -26,7 +26,7 @@ export class AuthService {
 
   doLoginWithGoogle() {
     return new Promise<any>((resolve, reject) => {
-      let provider = new auth.GoogleAuthProvider();
+      const provider = new auth.GoogleAuthProvider();
       provider.addScope('profile');
       provider.addScope('email');
       this.afAuth.auth
@@ -35,7 +35,7 @@ export class AuthService {
           this.router.navigate(['']);
           resolve(res);
         }, err => reject(err));
-    })
+    });
   }
 
   doRegister(email: string, password: string) {
@@ -45,7 +45,7 @@ export class AuthService {
           this.router.navigate(['']);
           resolve(res);
         }, err => reject(err));
-    })
+    });
   }
 
   doLogin(email: string, password: string) {
@@ -55,7 +55,7 @@ export class AuthService {
           this.router.navigate(['']);
           resolve(res);
         }, err => reject(err));
-    })
+    });
   }
 
   doLogout() {
@@ -72,7 +72,7 @@ export class AuthService {
       } else {
         reject();
       }
-    })
+    });
   }
 
 }

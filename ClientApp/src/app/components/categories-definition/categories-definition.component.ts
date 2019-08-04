@@ -14,7 +14,7 @@ export class CategoriesDefinitionComponent implements OnInit {
   categories: Category[];
 
   form: FormGroup = null;
-  actualAction = "Add new";
+  actualAction = 'Add new';
 
   constructor(private fb: FormBuilder, private categoryService: CategoryService, private messageService: MessageService) { }
 
@@ -41,7 +41,7 @@ export class CategoriesDefinitionComponent implements OnInit {
 
   editBtnClick(category: Category) {
     this.initForm(category);
-    this.actualAction = "Edit existing";
+    this.actualAction = 'Edit existing';
   }
 
   removeBtnClick(id: number) {
@@ -54,7 +54,7 @@ export class CategoriesDefinitionComponent implements OnInit {
         this.messageService.error(null, 'Something goes wrong while try to remove category.');
         console.log(JSON.stringify(err));
       }
-    )
+    );
   }
 
   save() {
@@ -65,13 +65,13 @@ export class CategoriesDefinitionComponent implements OnInit {
           this.messageService.success(null, 'Category is saved successfull!');
           this.initForm(null);
           this.fetchCategories();
-          this.actualAction = "Add new";
+          this.actualAction = 'Add new';
         },
         err => {
           this.messageService.error(null, 'Something goes wrong while try to save category.');
           console.log(JSON.stringify(err));
         }
-      )
+      );
     } else {
       this.name.markAllAsTouched();
     }
@@ -79,7 +79,7 @@ export class CategoriesDefinitionComponent implements OnInit {
 
   reset() {
     this.initForm(null);
-    this.actualAction = "Add new";
+    this.actualAction = 'Add new';
   }
 
   private fetchCategories() {
@@ -87,7 +87,7 @@ export class CategoriesDefinitionComponent implements OnInit {
   }
 
   private randormColor(): string {
-    return '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+    return '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
   }
 
 

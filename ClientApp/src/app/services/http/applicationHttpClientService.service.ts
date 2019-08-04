@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
-import { AuthService } from "../auth/auth.service";
+import { Injectable } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
 import { map, flatMap, first } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { AngularFireAuth } from "@angular/fire/auth";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
     providedIn: 'root'
@@ -57,7 +57,7 @@ export class ApplicationHttpClient {
                     'Content-Type': 'application/json'
                 });
             }
-            ))
+            ));
     }
 
-} 
+}

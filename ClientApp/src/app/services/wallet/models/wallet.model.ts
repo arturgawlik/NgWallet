@@ -1,4 +1,4 @@
-import { WalletChange } from "./walletChange.model";
+import { WalletChange } from './walletChange.model';
 
 export interface Wallet {
     id: number;
